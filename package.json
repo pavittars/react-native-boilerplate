@@ -31,10 +31,10 @@
       "pre-commit": "lint-staged"
     }
   },
-    "lint-staged": {
-      "linters": {
-        "*.{js,scss}": ["yarn lint", "git add"]
-      },
-      "ignore": ["**/dist/*.min.js"]
-    }
+  "lint-staged": {
+    "**/*.js": [
+      "yarn lint",
+      "git add"
+    ]
+  }
 }
