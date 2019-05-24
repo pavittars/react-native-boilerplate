@@ -8,5 +8,7 @@
 /tests/performance/**
 /tmp/**
 test.js
-!.eslintrc.js
+yarn.lock
+package.json
+.eslintrc.json
 /__tests__/**
