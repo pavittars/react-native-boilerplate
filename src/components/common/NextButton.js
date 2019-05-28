@@ -12,8 +12,8 @@ const NextButton = (props) => {
     )
 };
 
-NextButton.propTypes={
-    _onPressButton: PropTypes.function.isRequired,
+NextButton.propTypes = {
+    _onPressButton: PropTypes.func.isRequired,
     _name: PropTypes.string.isRequired
 };
 

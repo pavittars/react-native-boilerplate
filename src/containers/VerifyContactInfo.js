@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, Text, Button } from "react-native";
+import Layout from "../components/common/Layout";
 
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
@@ -11,22 +12,24 @@ class VerifyContactInfoScreen extends Component {
     }
     render() {
         return (
-            <View>
-                <Text>Verify Contact Info</Text>
-                <Text>Code </Text>
-                {/* <TextInput
+            <Layout>
+                <View>
+                    <Text>Verify Contact Info</Text>
+                    <Text>Code </Text>
+                    {/* <TextInput
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                     onChangeText={(text) => this.setState({ text })}
                     value={this.state.text}
                     placeholder="john Doe"
                 /> */}
-                <Button
-                    onPress={() => this.props.navigation.navigate('ConnectBank')}
-                    title="Next"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                />
-            </View>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('ConnectBank')}
+                        title="Next"
+                        color="#841584"
+                        accessibilityLabel="Learn more about this purple button"
+                    />
+                </View>
+            </Layout>
         );
     }
 }

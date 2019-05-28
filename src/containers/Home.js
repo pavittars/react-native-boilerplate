@@ -9,7 +9,6 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Layout from "../components/common/Layout";
 import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
 class HomeScreen extends Component {
@@ -26,7 +25,6 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <Layout>
         <View style={styles.container}>
           <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
             <Text>CASH <Text>OUT</Text> </Text>
@@ -43,7 +41,6 @@ class HomeScreen extends Component {
           </View>
           <View style={{ flex: 0.1 }}></View>
         </View>
-      </Layout>
     );
   }
 }
@@ -51,7 +48,7 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#F5FCFF',
     paddingHorizontal: 40
   }
 });

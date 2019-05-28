@@ -10,7 +10,7 @@ const Layout = (props) => {
 };
 
 Layout.propTypes = {
-    children: PropTypes.function.isRequired
+    children: PropTypes.node.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         flex: 1,
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor:'#fff'
     }
 });
 

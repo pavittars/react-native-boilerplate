@@ -7,14 +7,21 @@ import ConnectBankScreen from "../containers/ConnectBank";
 
 const Navigation = createStackNavigator({
     Home: {
-        screen: HomeScreen
+        screen: HomeScreen,
+        navigationOptions: () => {
+            return ({
+                headerBackTitle: null,
+                headerStyle: {
+                    backgroundColor: '#fff'
+                }
+            })
+        }
     },
     PersonalInfo: {
         screen: PersonalInfoScreen,
-        navigationOptions: ({ navigation }) => {
-            let title = navigation ? 'Personal Info' : 'Personal Info';
+        navigationOptions: () => {
             return ({
-                title,
+                title: 'Personal Info',
                 headerBackTitle: null
             })
         }
