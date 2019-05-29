@@ -11,7 +11,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
-// import IntroLogo from '../assets/intrologo';
+import Image from 'react-native-remote-svg'
+import IntroLogo from '../assets/intrologo.svg';
 class HomeScreen extends Component {
 
   constructor(props) {
@@ -28,13 +29,20 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
-          
-          <Text style={{fontFamily:'Cera Basic'}}>CASH <Text>OUT</Text> </Text>
+          <Image
+            source={
+              IntroLogo
+            }
+          />
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, color: '#6059E9' }}>CASH</Text>
+            <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, fontWeight: '700', color: '#6059E9' }}>OUT</Text>
+          </View>
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
           <View>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontFamily:'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30,fontFamily:'Cera Basic' }}>That Simple. </Text>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontFamily: 'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30, fontFamily: 'Cera Basic' }}>That Simple. </Text>
           </View>
         </View>
         <View style={{ flex: 0.2 }}>
