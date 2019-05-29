@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
+// import IntroLogo from '../assets/intrologo';
 class HomeScreen extends Component {
 
   constructor(props) {
@@ -25,22 +26,23 @@ class HomeScreen extends Component {
 
   render() {
     return (
-        <View style={styles.container}>
-          <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>CASH <Text>OUT</Text> </Text>
-          </View>
-          <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-            <View>
-              <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9' }}>Cash out your Earnings In Under 60 Seconds</Text>
-              <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30 }}>That Simple. </Text>
-            </View>
-          </View>
-          <View style={{ flex: 0.2 }}>
-            <NextButton _onPressButton={this._handleClick} _name={'SIGN UP NOW'} />
-            <NextButton type={'reverse'} _onPressButton={this._handleClick} _name={'Have an account? Log in'} />
-          </View>
-          <View style={{ flex: 0.1 }}></View>
+      <View style={styles.container}>
+        <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
+          
+          <Text>CASH <Text>OUT</Text> </Text>
         </View>
+        <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
+          <View>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9' }}>Cash out your Earnings In Under 60 Seconds</Text>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30 }}>That Simple. </Text>
+          </View>
+        </View>
+        <View style={{ flex: 0.2 }}>
+          <NextButton _onPressButton={this._handleClick} _name={'SIGN UP NOW'} />
+          <NextButton type={'reverse'} _onPressButton={this._handleClick} _name={'Have an account? Log in'} />
+        </View>
+        <View style={{ flex: 0.1 }}></View>
+      </View>
     );
   }
 }

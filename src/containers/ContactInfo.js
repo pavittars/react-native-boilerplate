@@ -23,7 +23,7 @@ class ContactInfoScreen extends Component {
             <Layout>
                 <View style={styles.container}>
                     <View style={{ flex: 0.4, paddingTop: 53 }}>
-                        <InputNumber placeholder="John Doe" label="Full Name" value={this.state.text} onMutate={(text) => this.setState({ text })} />
+                        <InputNumber placeholder="55533535555" label="Phone number" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
                     </View>
