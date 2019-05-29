@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { View, TextInput, Text } from 'react-native';
+import {  moderateScale } from 'react-native-size-matters';
+
 const InputText = (props) => {
     return (
         <View>
-            <Text style={{ fontSize: 20, lineHeight: 25, fontWeight: '500' }}>{props.label}</Text>
-            <TextInput style={{ height: 40, fontSize: 20, marginTop: 10, paddingBottom: 8, borderBottomWidth: 1, borderColor: '#DBDAEA' }} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} onChangeText={(text) => props.onMutate(text)} />
+            <Text style={{ fontSize: moderateScale(20), lineHeight: moderateScale(25)}}>{props.label}</Text>
+            <TextInput style={{ height: moderateScale(50), fontSize: moderateScale(20), marginTop: moderateScale(10), paddingBottom: moderateScale(8), borderBottomWidth: moderateScale(1), borderColor: moderateScale('#DBDAEA') }} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} onChangeText={(text) => props.onMutate(text)} />
         </View>
     )
 }

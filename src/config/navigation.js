@@ -59,7 +59,14 @@ const Navigation = createStackNavigator({
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: '#6059e9',
-                height: 112
+                height: 112,
+                shadowOpacity: 0,
+                shadowOffset: {
+                    height: 0,
+                },
+                shadowRadius: 0,
+                elevation:0
+
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

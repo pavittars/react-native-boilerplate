@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Layout from "../components/common/Layout";
 import NextButton from '../components/common/NextButton';
 import InputText from '../components/common/InputText';
+import {  moderateScale } from 'react-native-size-matters';
 
 class PersonalInfoScreen extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class PersonalInfoScreen extends Component {
         return (
             <Layout>
                 <View style={styles.container}>
-                    <View style={{ flex: 0.4, paddingTop: 53 }}>
+                    <View style={{ flex: moderateScale(0.4), paddingTop: moderateScale(53) }}>
                         <InputText placeholder="John Doe" label="Full Name" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
