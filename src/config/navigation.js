@@ -27,19 +27,38 @@ const Navigation = createStackNavigator({
         }
     },
     ContactInfo: {
-        screen: ContactInfoScreen
+        screen: ContactInfoScreen,
+        navigationOptions: () => {
+            return ({
+                title: 'Contact Info',
+                headerBackTitle: null
+            })
+        }
     },
     VerifyContactInfo: {
-        screen: VerifyContactInfoScreen
+        screen: VerifyContactInfoScreen,
+        navigationOptions: () => {
+            return ({
+                title: 'Verify Contact Info',
+                headerBackTitle: null
+            })
+        }
     },
     ConnectBank: {
-        screen: ConnectBankScreen
+        screen: ConnectBankScreen,
+        navigationOptions: () => {
+            return ({
+                title: 'Connect Bank',
+                headerBackTitle: null
+            })
+        }
     }
 }, {
         initialRouteName: "Home",
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#6059e9'
+                backgroundColor: '#6059e9',
+                height: 112
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

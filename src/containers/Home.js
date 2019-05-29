@@ -1,7 +1,7 @@
 /**
  * Sample React Native App
  * @author Pavittar Singh
- * @description Home page for login and sign up button
+ * @description Home page with login and sign up button
  * 28/05/2019
  * @format
  * @flow
@@ -37,7 +37,7 @@ class HomeScreen extends Component {
           </View>
           <View style={{ flex: 0.2 }}>
             <NextButton _onPressButton={this._handleClick} _name={'SIGN UP NOW'} />
-            <NextButton _onPressButton={this._handleClick} _name={'Have an account? Log in'} />
+            <NextButton type={'reverse'} _onPressButton={this._handleClick} _name={'Have an account? Log in'} />
           </View>
           <View style={{ flex: 0.1 }}></View>
         </View>
