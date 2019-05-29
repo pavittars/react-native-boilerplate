@@ -1,6 +1,9 @@
 import React from 'react'
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import {  moderateScale } from 'react-native-size-matters';
+//import Icon from 'react-native-vector-icons/FontAwesome';
+
 const NextButton = ({
     _name,
     _onPressButton,
@@ -26,32 +29,31 @@ NextButton.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 20,
-        paddingHorizontal: 20,
+        paddingVertical: moderateScale(15),
     },
     paddX_0: {
-        paddingVertical: 15,
-        paddingHorizontal: 0,
+        paddingVertical: moderateScale(15),
+        paddingHorizontal: moderateScale(0),
     },
     action: {
         backgroundColor: '#6059E9',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        borderRadius: 5
+        paddingHorizontal: moderateScale(15),
+        paddingVertical: moderateScale(15),
+        borderRadius: moderateScale(5)
     },
     name: {
-        fontSize: 18,
+        fontSize: moderateScale(18),
         color: 'white',
-        lineHeight: 23,
-        fontWeight: 'bold',
-        textTransform: 'uppercase'
+        fontFamily:'Cera Basic',
+        lineHeight: moderateScale(23),
+        fontWeight: 'bold'
     },
     icon: {
-        width: 25,
-        height: 25
+        width: moderateScale(25),
+        height: moderateScale(25)
     }
 })
 

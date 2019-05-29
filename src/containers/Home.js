@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
+import {  moderateScale } from 'react-native-size-matters';
 // import IntroLogo from '../assets/intrologo';
 class HomeScreen extends Component {
 
@@ -33,8 +34,8 @@ class HomeScreen extends Component {
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
           <View>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontFamily:'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30,fontFamily:'Cera Basic' }}>That Simple. </Text>
+            <Text style={{ fontSize: moderateScale(26), lineHeight: moderateScale(33), color: '#6059E9', fontFamily:'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
+            <Text style={{ fontSize: moderateScale(26), lineHeight: moderateScale(33), color: '#6059E9', fontWeight: 'bold', paddingTop: moderateScale(30),fontFamily:'Cera Basic' }}>That Simple. </Text>
           </View>
         </View>
         <View style={{ flex: 0.2 }}>

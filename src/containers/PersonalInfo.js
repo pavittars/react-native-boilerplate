@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet,KeyboardAvoidingView } from "react-native";
 import PropTypes from 'prop-types';
 import Layout from "../components/common/Layout";
 import NextButton from '../components/common/NextButton';
@@ -22,18 +22,14 @@ class PersonalInfoScreen extends Component {
     render() {
         return (
             <Layout>
-                <View style={styles.container}>
-                    <View style={{ flex: moderateScale(0.4), paddingTop: moderateScale(53) }}>
+                <KeyboardAvoidingView style={styles.container} >
+                    <View style={{ flex: 0.8, paddingTop: moderateScale(53) }}>
                         <InputText placeholder="John Doe" label="Full Name" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
-                    <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-                    </View>
-                    <View style={{ flex: 0.1 }}>
-                    </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={'PaddX'} _onPressButton={this._handleClick} _name={'Next'} />
+                        <NextButton style={''} _onPressButton={this._handleClick} _name={'Next'} />
                     </View>
-                </View>
+                </KeyboardAvoidingView>
             </Layout>
         );
     }
@@ -46,7 +42,8 @@ PersonalInfoScreen.propTypes = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 40
+        paddingHorizontal: moderateScale(40),
+        paddingTop:10
     }
 });
 
