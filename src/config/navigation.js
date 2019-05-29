@@ -10,6 +10,7 @@ const Navigation = createStackNavigator({
         screen: HomeScreen,
         navigationOptions: () => {
             return ({
+                header: null,
                 headerBackTitle: null,
                 headerStyle: {
                     backgroundColor: '#fff'
