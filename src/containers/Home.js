@@ -29,12 +29,12 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
           
-          <Text>CASH <Text>OUT</Text> </Text>
+          <Text style={{fontFamily:'Cera Basic'}}>CASH <Text>OUT</Text> </Text>
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
           <View>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9' }}>Cash out your Earnings In Under 60 Seconds</Text>
-            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30 }}>That Simple. </Text>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontFamily:'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
+            <Text style={{ fontSize: 26, lineHeight: 33, color: '#6059E9', fontWeight: 'bold', paddingTop: 30,fontFamily:'Cera Basic' }}>That Simple. </Text>
           </View>
         </View>
         <View style={{ flex: 0.2 }}>
