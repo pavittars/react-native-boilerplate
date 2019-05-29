@@ -42,6 +42,7 @@
 		30D674496DA7405BBD93279F /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E9255DC660843DCB86F60FE /* Ionicons.ttf */; };
 		33C20019113E4763A60E1502 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBB1778A5B9845E7B92DE717 /* FontAwesome5_Regular.ttf */; };
 		3CE8DC8C663A4357A752F575 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9AE0A06B95B41B59E108787 /* libRNVectorIcons.a */; };
+		555C3086229E8DAF007E1173 /* cera-basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 555C305C229E8D66007E1173 /* cera-basic.otf */; };
 		63D9AA47758947E8B64F9A64 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 602B106716DC45DDAABF9048 /* FontAwesome5_Brands.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		908D6279B90E49B4960070F0 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28C5D300A8B948D78BF670DE /* Entypo.ttf */; };
@@ -395,6 +396,7 @@
 		2E9255DC660843DCB86F60FE /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		337E0339B17D43FE8F85A70D /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		5014064284204A47943CDED7 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
+		555C305C229E8D66007E1173 /* cera-basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cera-basic.otf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		602B106716DC45DDAABF9048 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7376AE0C7E8D41B0BC473C9A /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				1A9A11D8371A43EAB8FB43F3 /* Octicons.ttf */,
 				D75AA2BB3F88403BA26B49DF /* SimpleLineIcons.ttf */,
 				7376AE0C7E8D41B0BC473C9A /* Zocial.ttf */,
+				555C305C229E8D66007E1173 /* cera-basic.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				555C3086229E8DAF007E1173 /* cera-basic.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				949AC970739C4EA6A2AF1A18 /* AntDesign.ttf in Resources */,
