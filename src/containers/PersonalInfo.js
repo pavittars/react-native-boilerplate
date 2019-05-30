@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet,KeyboardAvoidingView } from "react-native";
+import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import PropTypes from 'prop-types';
 import Layout from "../components/common/Layout";
 import NextButton from '../components/common/NextButton';
 import InputText from '../components/common/InputText';
-import {  moderateScale } from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
+
+import { connect } from 'react-redux';
 
 class PersonalInfoScreen extends Component {
     constructor(props) {
@@ -43,8 +45,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: moderateScale(40),
-        paddingTop:10
+        paddingTop: 10
     }
 });
 
-export default PersonalInfoScreen;
+const mapStateToProps = (state) => {
+    return {
+        userstatus: state.userstatus,
+    }
+};
+
+export default connect(mapStateToProps, null)(PersonalInfoScreen);

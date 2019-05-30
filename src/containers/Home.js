@@ -14,17 +14,26 @@ import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
 import Image from 'react-native-remote-svg';
 import IntroLogo from '../assets/intrologo.svg';
+import { userstatus } from '../actions/signup'
+import { connect } from 'react-redux';
 
 class HomeScreen extends Component {
 
   constructor(props) {
     super(props);
-    this._handleClick = this._handleClick.bind(this);
+    this._handleSignup = this._handleSignup.bind(this);
+    this._handleSignIn = this._handleSignIn.bind(this);
   }
 
 
-  _handleClick() {
+  _handleSignup() {
+    this.props.userstatus('inactive');
     this.props.navigation.navigate('PersonalInfo');
+  }
+
+  _handleSignIn() {
+    this.props.userstatus('active');
+    this.props.navigation.navigate('ContectInfo');
   }
 
   render() {
@@ -47,8 +56,8 @@ class HomeScreen extends Component {
           </View>
         </View>
         <View style={{ flex: 0.2 }}>
-          <NextButton _onPressButton={this._handleClick} _name={'SIGN UP NOW'} />
-          <NextButton type={'reverse'} _onPressButton={this._handleClick} _name={'Have an account? Log in'} />
+          <NextButton _onPressButton={this._handleSignup} _name={'SIGN UP NOW'} />
+          <NextButton type={'reverse'} _onPressButton={this._handleSignIn} _name={'Have an account? Log in'} />
         </View>
         <View style={{ flex: 0.1 }}></View>
       </View>
@@ -59,21 +68,22 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#F5FCFF',
     paddingHorizontal: 40
   }
 });
 
 HomeScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  userstatus: PropTypes.string
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     counter: state.counter,
-//   }
-// };
+const mapStateToProps = (state) => {
+  return {
+    loginstatus: state.userstatus,
 
-// const mapDispatchToProps = (dispatch) => bindActionCreators({ increment, decrement }, dispatch);
+  }
+};
 
-export default HomeScreen;
+const mapDispatchToProps = (dispatch) => ({ userstatus: (data) => dispatch(userstatus(data)) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

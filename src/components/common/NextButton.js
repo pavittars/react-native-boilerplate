@@ -1,21 +1,25 @@
 import React from 'react'
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import {  moderateScale } from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
 const NextButton = ({
     _name,
     _onPressButton,
-    style = 'container'
-    // type = ''
+    style = 'container',
+    type = ''
 }) => {
     return (
         <View style={[styles[style]]}>
-            <TouchableOpacity onPress={_onPressButton} style={[styles.action]}>
+            {(type === '') && <TouchableOpacity onPress={_onPressButton} style={[styles.action]}>
                 <Text style={styles.name}>{_name}</Text>
                 <Image style={styles.icon} source={require('../../assets/baseline-arrow_forward-white-18/2x/baseline_arrow_forward_white_18dp.png')} />
-            </TouchableOpacity>
+            </TouchableOpacity>}
+            {(type === 'reverse') && <TouchableOpacity onPress={_onPressButton} style={[styles.action_inverse]} activeOpacity={5}>
+                <Text style={styles.name_inverse}>{_name}</Text>
+                <Image style={styles.icon} source={require('../../assets/baseline-arrow_forward-white-18/2x/baseline_arrow_forward_white_18dp.png')} />
+            </TouchableOpacity>}
         </View>
     )
 };
@@ -24,7 +28,7 @@ NextButton.propTypes = {
     _onPressButton: PropTypes.func.isRequired,
     _name: PropTypes.string.isRequired,
     style: PropTypes.string,
-    // type: PropTypes.string
+    type: PropTypes.string
 };
 
 const styles = StyleSheet.create({
@@ -44,10 +48,28 @@ const styles = StyleSheet.create({
         paddingVertical: moderateScale(15),
         borderRadius: moderateScale(5)
     },
+    action_inverse: {
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderWidth: 1,
+        borderColor: '#6059E9',
+        paddingHorizontal: moderateScale(15),
+        paddingVertical: moderateScale(15),
+        borderRadius: moderateScale(5)
+    },
     name: {
         fontSize: moderateScale(18),
         color: 'white',
-        fontFamily:'Cera Basic',
+        fontFamily: 'Cera Basic',
+        lineHeight: moderateScale(23),
+        fontWeight: 'bold'
+    },
+    name_inverse: {
+        fontSize: moderateScale(18),
+        color: '#6059E9',
+        fontFamily: 'Cera Basic',
         lineHeight: moderateScale(23),
         fontWeight: 'bold'
     },
