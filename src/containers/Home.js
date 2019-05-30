@@ -13,7 +13,7 @@ import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
 import Image from 'react-native-remote-svg';
-import IntroLogo from '../assets/intrologo.svg';
+import IntroLogo from '../assets/cashout.png';
 import { userstatus } from '../actions/signup'
 import { connect } from 'react-redux';
 
@@ -44,10 +44,11 @@ class HomeScreen extends Component {
             source={
               IntroLogo
             }
+            style={{ width: moderateScale(179), height: moderateScale(138) }}
           />
-          <View style={{ flexDirection: 'row' }}>
+          {/* <View style={{ flexDirection: 'row' }}>
             <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, color: '#6059E9' }}>CASH<Text style={{ fontFamily: 'Cera Basic', fontSize: 38, fontWeight: '700', color: '#6059E9' }}>OUT</Text></Text>
-          </View>
+          </View> */}
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
           <View style={{paddingRight:50}}>
