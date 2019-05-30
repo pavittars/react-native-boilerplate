@@ -42,14 +42,14 @@ class ConnectBankScreen extends Component {
                             <Text style={{ fontFamily: 'Cera Basic', fontSize: moderateScale(16), lineHeight: moderateScale(23), fontWeight: 'bold' }}>Please confirm:</Text>
                         </View>
                     </View>
-                    <View style={{ flex: 0.4 }}>
+                    {/* <View style={{ flex: 0.4 }}>
                         <Switch onValueChange={(e) => this._switchHandler(e, 'switch_1')} value={switch_1} />
                         <Text>My account is at least 2 months old</Text>
                         <Switch onValueChange={(e) => this._switchHandler(e, 'switch_2')} value={switch_2} />
                         <Text>I deposit income to this account</Text>
                         <Switch onValueChange={(e) => this._switchHandler(e, 'switch_3')} value={switch_3} />
                         <Text>I make more than 1000 a month</Text>
-                    </View>
+                    </View> */}
                     <View style={{ flex: 0.2 }}>
                         <NextButton style={''} _onPressButton={this._handleClick} _name={'NEXT'} />
                     </View>

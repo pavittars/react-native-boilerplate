@@ -60,12 +60,14 @@ const Navigation = createStackNavigator({
             headerStyle: {
                 backgroundColor: '#6059e9',
                 height: 112,
+                borderBottomWidth:0,
+                borderColor:'none',
                 shadowOpacity: 0,
                 shadowOffset: {
                     height: 0,
                 },
                 shadowRadius: 0,
-                elevation:0
+                elevation: 0
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -73,7 +75,7 @@ const Navigation = createStackNavigator({
                 fontSize: 18,
                 lineHeight: 23,
                 textAlign: 'center',
-                fontFamily:'Cera Basic'
+                fontFamily: 'Cera Basic'
             },
         },
     });

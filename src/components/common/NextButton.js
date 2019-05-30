@@ -18,7 +18,7 @@ const NextButton = ({
             </TouchableOpacity>}
             {(type === 'reverse') && <TouchableOpacity onPress={_onPressButton} style={[styles.action_inverse]} activeOpacity={5}>
                 <Text style={styles.name_inverse}>{_name}</Text>
-                <Image style={styles.icon} source={require('../../assets/baseline-arrow_forward-white-18/2x/baseline_arrow_forward_white_18dp.png')} />
+                <Image style={styles.icon} source={require('../../assets/baseline-arrow_forward-black-18/2x/baseline_arrow_forward_black_18dp.png')} />
             </TouchableOpacity>}
         </View>
     )
@@ -34,10 +34,6 @@ NextButton.propTypes = {
 const styles = StyleSheet.create({
     container: {
         paddingVertical: moderateScale(15),
-    },
-    paddX_0: {
-        paddingVertical: moderateScale(15),
-        paddingHorizontal: moderateScale(0),
     },
     action: {
         backgroundColor: '#6059E9',

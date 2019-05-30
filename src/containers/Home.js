@@ -27,13 +27,13 @@ class HomeScreen extends Component {
 
 
   _handleSignup() {
-    this.props.userstatus('inactive');
+    this.props.SetUserStatus('inactive');
     this.props.navigation.navigate('PersonalInfo');
   }
 
   _handleSignIn() {
-    this.props.userstatus('active');
-    this.props.navigation.navigate('ContectInfo');
+    this.props.SetUserStatus('active');
+    this.props.navigation.navigate('ContactInfo');
   }
 
   render() {
@@ -50,7 +50,7 @@ class HomeScreen extends Component {
           </View>
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-          <View>
+          <View style={{paddingRight:50}}>
             <Text style={{ fontSize: moderateScale(26), lineHeight: moderateScale(33), color: '#6059E9', fontFamily: 'Cera Basic' }}>Cash out your Earnings In Under 60 Seconds</Text>
             <Text style={{ fontSize: moderateScale(26), lineHeight: moderateScale(33), color: '#6059E9', fontWeight: 'bold', paddingTop: moderateScale(30), fontFamily: 'Cera Basic' }}>That Simple. </Text>
           </View>
@@ -74,16 +74,16 @@ const styles = StyleSheet.create({
 
 HomeScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
+  SetUserStatus: PropTypes.func.isRequired,
   userstatus: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
   return {
-    loginstatus: state.userstatus,
-
+    userstatus: state.userstatus,
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({ userstatus: (data) => dispatch(userstatus(data)) });
+const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -10,8 +10,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "prop-types": "^15.7.2",
+    "querystring": "^0.2.0",
     "react": "16.8.3",
     "react-native": "0.59.8",
+    "react-native-easy-toast": "^1.2.0",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-remote-svg": "^2.0.6",
     "react-native-size-matters": "^0.2.1",
@@ -41,11 +43,7 @@
   "jest": {
     "preset": "react-native"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  
   "lint-staged": {
     "**/*.js": [
       "yarn lint",

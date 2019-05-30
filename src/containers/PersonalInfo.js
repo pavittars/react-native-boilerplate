@@ -5,8 +5,10 @@ import Layout from "../components/common/Layout";
 import NextButton from '../components/common/NextButton';
 import InputText from '../components/common/InputText';
 import { moderateScale } from 'react-native-size-matters';
-
+import { username } from '../actions/signup';
 import { connect } from 'react-redux';
+import { validateAlphabet, showAlert } from "../constants/util";
+import MESSAGES from "../constants/messages";
 
 class PersonalInfoScreen extends Component {
     constructor(props) {
@@ -14,10 +16,31 @@ class PersonalInfoScreen extends Component {
         this.state = {
             text: ''
         };
-        this._handleClick = this._handleClick.bind(this);
+        this._handleValidate = this._handleValidate.bind(this);
+        this._handleSubmit = this._handleSubmit.bind(this);
     }
 
-    _handleClick() {
+    componentDidMount() {
+        this.props.setUserName(this.state.text);
+    }
+
+    // validate the fields in the component before submiting (validate username)
+    _handleValidate() {
+        if (!this.state.text.trim().length) {
+            showAlert(MESSAGES.requiredMessage('Full Name'));
+            return;
+        }
+        if (!validateAlphabet(this.state.text)) {
+            showAlert(MESSAGES.ValidateMessage('Full Name'));
+            return;
+        }
+
+        this._handleSubmit();
+    }
+
+    // submit the data in the store (save username)
+    _handleSubmit() {
+        this.props.setUserName(this.state.text);
         this.props.navigation.navigate('ContactInfo');
     }
 
@@ -29,7 +52,7 @@ class PersonalInfoScreen extends Component {
                         <InputText placeholder="John Doe" label="Full Name" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={''} _onPressButton={this._handleClick} _name={'NEXT'} />
+                        <NextButton style={''} _onPressButton={this._handleValidate} _name={'NEXT'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>
@@ -39,6 +62,8 @@ class PersonalInfoScreen extends Component {
 
 PersonalInfoScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
+    setUserName: PropTypes.func.isRequired,
+    username: PropTypes.string
 }
 
 const styles = StyleSheet.create({
@@ -51,8 +76,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        userstatus: state.userstatus,
+        username: state.username
     }
 };
 
-export default connect(mapStateToProps, null)(PersonalInfoScreen);
+const mapDispatchToProps = (dispatch) => ({ setUserName: (data) => dispatch(username(data)) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfoScreen);

@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-import { userstatus } from './signup';
-import { counter } from './counter';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -11,6 +9,8 @@ import {
 import thunk from 'redux-thunk';
 import logger from "redux-logger";
 
+import { userstatus, username, userphonenumber } from './signup';
+
 const persistConfig = {
     key: 'root',
     storage: storage,
@@ -19,7 +19,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     userstatus,
-    counter
+    username,
+    userphonenumber
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

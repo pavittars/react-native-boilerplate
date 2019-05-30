@@ -16,6 +16,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 let { store, persistor } = createStore();
 
+import {YellowBox} from 'react-native';
+YellowBox.ignoreWarnings(['Warning: ReactNative.createElement']);
+console.disableYellowBox = true; 
+
 export default class App extends Component {
   render() {
     return (

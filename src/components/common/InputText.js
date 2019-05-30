@@ -7,7 +7,7 @@ const InputText = (props) => {
     return (
         <View>
             <Text style={{ fontSize: moderateScale(20), lineHeight: moderateScale(25)}}>{props.label}</Text>
-            <TextInput style={{ height: moderateScale(50), fontSize: moderateScale(20), marginTop: moderateScale(10), paddingBottom: moderateScale(8), borderBottomWidth: moderateScale(1) }} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} onChangeText={(text) => props.onMutate(text)} />
+            <TextInput style={{ height: moderateScale(50), fontSize: moderateScale(20), marginTop: moderateScale(10), paddingBottom: moderateScale(8), borderBottomWidth: moderateScale(1) }} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} maxLength={props.maxlength} onChangeText={(text) => props.onMutate(text)} />
         </View>
     )
 }

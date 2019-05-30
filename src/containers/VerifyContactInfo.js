@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from "react-native";
+import { connect } from 'react-redux';
 import Layout from "../components/common/Layout";
-import InputNumber from "../components/common/InputNumber";
+import InputText from "../components/common/InputText";
 import NextButton from "../components/common/NextButton";
+import { validatePhoneNumber, showAlert } from "../constants/util";
+import MESSAGES from "../constants/messages";
+import RestClient from '../utilities/RestClient';
 
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
@@ -11,11 +15,43 @@ class VerifyContactInfoScreen extends Component {
         this.state = {
             text: ''
         };
-        this._handleClick = this._handleClick.bind(this);
+        this._handleValidation = this._handleValidation.bind(this);
+        this._handleSubmit = this._handleSubmit.bind(this);
     }
 
-    _handleClick() {
-        this.props.navigation.navigate('ConnectBank');
+    componentDidMount() {
+        const Message = this.props.navigation.getParam('message');
+        showAlert(Message);
+    }
+
+
+    _handleValidation() {
+        if (!this.state.text.trim().length) {
+            showAlert(MESSAGES.requiredMessage('Code!'));
+            return;
+        }
+        this._handleSubmit();
+    }
+
+
+    _handleSubmit() {
+        let { navigation, userstatus, userphonenumber } = this.props;
+        let { text } = this.state;
+        RestClient.post('confirmOtp', {
+            phoneNumber: userphonenumber,
+            otp: text,
+            status: userstatus
+          })
+            .then(result => {
+                if (result.status === 200) {
+                    navigation.navigate('ConnectBank');
+                } else {
+                    showAlert('Something went wrong !');
+                }
+            })
+            .catch(() => {
+                showAlert('Something went wrong !');
+            });
     }
 
     render() {
@@ -23,14 +59,14 @@ class VerifyContactInfoScreen extends Component {
             <Layout>
                 <View style={styles.container}>
                     <View style={{ flex: 0.4, paddingTop: 53 }}>
-                        <InputNumber placeholder="123456" label="Code" value={this.state.text} onMutate={(text) => this.setState({ text })} />
+                        <InputText placeholder="123456" label="Code" maxlength={15} value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
                     </View>
                     <View style={{ flex: 0.1 }}>
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={'PaddX'} _onPressButton={this._handleClick} _name={'NEXT'} />
+                        <NextButton style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />
                     </View>
                 </View>
             </Layout>
@@ -50,5 +86,11 @@ const styles = StyleSheet.create({
 });
 
 
+const mapStateToProps = (state) => {
+    return {
+        userstatus: state.userstatus,
+        userphonenumber: state.userphonenumber
+    }
+};
 
-export default VerifyContactInfoScreen;
+export default connect(mapStateToProps, null)(VerifyContactInfoScreen);
