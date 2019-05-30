@@ -66,15 +66,14 @@ const Navigation = createStackNavigator({
                 },
                 shadowRadius: 0,
                 elevation:0
-
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
-                color: '#FFFFFF',
+                color: 'white',
                 fontSize: 18,
-                fontWeight: 'bold',
                 lineHeight: 23,
-                textAlign: 'center'
+                textAlign: 'center',
+                fontFamily:'Cera Basic'
             },
         },
     });
