@@ -27,7 +27,7 @@ class PersonalInfoScreen extends Component {
                         <InputText placeholder="John Doe" label="Full Name" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={''} _onPressButton={this._handleClick} _name={'Next'} />
+                        <NextButton style={''} _onPressButton={this._handleClick} _name={'NEXT'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>

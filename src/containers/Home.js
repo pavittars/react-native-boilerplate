@@ -12,7 +12,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import NextButton from '../components/common/NextButton';
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
-import Image from 'react-native-remote-svg'
+import Image from 'react-native-remote-svg';
 import IntroLogo from '../assets/intrologo.svg';
 
 class HomeScreen extends Component {

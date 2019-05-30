@@ -31,7 +31,7 @@ class ContactInfoScreen extends Component {
                     <View style={{ flex: 0.1 }}>
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={'PaddX'} _onPressButton={this._handleClick} _name={'Next'} />
+                        <NextButton style={'PaddX'} _onPressButton={this._handleClick} _name={'NEXT'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>
