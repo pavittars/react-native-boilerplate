@@ -37,8 +37,7 @@ class HomeScreen extends Component {
             }
           />
           <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, color: '#6059E9' }}>CASH</Text>
-            <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, fontWeight: '700', color: '#6059E9' }}>OUT</Text>
+            <Text style={{ fontFamily: 'Cera Basic', fontSize: 38, color: '#6059E9' }}>CASH<Text style={{ fontFamily: 'Cera Basic', fontSize: 38, fontWeight: '700', color: '#6059E9' }}>OUT</Text></Text>
           </View>
         </View>
         <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
