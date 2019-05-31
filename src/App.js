@@ -6,7 +6,7 @@
  * */
 
 import React, { Component } from 'react';
-import  Navigation  from './config/navigation';
+import AppNavigation  from './config/navigation';
 import {
   Provider
 } from 'react-redux';
@@ -25,7 +25,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation />
+          <AppNavigation />
         </PersistGate>
       </Provider>
     );

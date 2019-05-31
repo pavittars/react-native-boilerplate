@@ -20,11 +20,11 @@ const NextButton = ({
         <View style={[styles[style]]}>
             {(type === '') && <TouchableOpacity onPress={_onPressButton} style={[styles.action]}>
                 <Text style={styles.name}>{_name}</Text>
-                <Image  source={require('../../assets/right_arrow_white.png')} />
+                <Image source={require('../../assets/right_arrow_white.png')} />
             </TouchableOpacity>}
             {(type === 'reverse') && <TouchableOpacity onPress={_onPressButton} style={[styles.action_inverse]} activeOpacity={5}>
                 <Text style={styles.name_inverse}>{_name}</Text>
-                <Image style={styles.icon} source={require('../../assets/right_arrow_slate_blue.png')} />
+                <Image source={require('../../assets/right_arrow_slate_blue.png')} />
             </TouchableOpacity>}
         </View>
     )
