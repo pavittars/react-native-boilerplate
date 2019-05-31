@@ -1,8 +1,14 @@
+/*
+ * @file: app-config.js
+ * @description: Input Button common component for app.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
 import React from 'react'
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
-//import Icon from 'react-native-vector-icons/FontAwesome';
 
 const NextButton = ({
     _name,

@@ -1,14 +1,22 @@
+/*
+ * @file: PersonalInfo.js
+ * @description: Personal Info file for the application
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
+
 import React, { Component } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import PropTypes from 'prop-types';
-import Layout from "../components/common/Layout";
-import NextButton from '../components/common/NextButton';
-import InputText from '../components/common/InputText';
 import { moderateScale } from 'react-native-size-matters';
-import { username } from '../actions/signup';
 import { connect } from 'react-redux';
-import { validateAlphabet, showAlert } from "../constants/util";
-import MESSAGES from "../constants/messages";
+
+import Layout from "../../components/common/Layout";
+import NextButton from '../../components/common/NextButton';
+import InputText from '../../components/common/InputText';
+import { username } from '../../actions/signup';
+import { validateAlphabet, showAlert } from "../../constants/util";
+import MESSAGES from "../../constants/messages";
 
 class PersonalInfoScreen extends Component {
     constructor(props) {

@@ -1,3 +1,10 @@
+/*
+ * @file: reducers/signup.js
+ * @description: signup reducer file for the application
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
+
 import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER } from "../actions/signup";
 
 export const userstatus = (state = '', action) => {

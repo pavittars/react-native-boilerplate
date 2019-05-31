@@ -1,3 +1,10 @@
+/*
+ * @file: app-config.js
+ * @description: Validating login user and setting initial route.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
 import React from 'react';
 import { View, ActivityIndicator, StatusBar } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
@@ -11,7 +18,7 @@ export default class Naviagtion extends React.Component {
         super(props);
         this.state = {
             isLogin: false,
-            initialRouteName: 'Home'
+            initialRouteName: 'Intro'
         }
         this.setInitialRoute = this.setInitialRoute.bind(this);
     }
@@ -25,7 +32,7 @@ export default class Naviagtion extends React.Component {
     }
 
     setInitialRoute(userToken) {
-        this.setState({ isLogin: true, initialRouteName: userToken ? 'ConnectBank' : 'Home' });
+        this.setState({ isLogin: true, initialRouteName: userToken ? 'ConnectBank' : 'Intro' });
     }
 
     render() {

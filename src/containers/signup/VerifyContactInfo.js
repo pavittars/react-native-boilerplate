@@ -1,13 +1,21 @@
+/*
+ * @file: VerifyContactInfo.js
+ * @description: Verify Contact Info bank file for the application
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from "react-native";
 import { connect } from 'react-redux';
-import Layout from "../components/common/Layout";
-import InputText from "../components/common/InputText";
-import NextButton from "../components/common/NextButton";
-import { validatePhoneNumber, showAlert } from "../constants/util";
-import MESSAGES from "../constants/messages";
-import RestClient from '../utilities/RestClient';
+import { showAlert } from "../../constants/util";
+
+import Layout from "../../components/common/Layout";
+import InputText from "../../components/common/InputText";
+import NextButton from "../../components/common/NextButton";
+import MESSAGES from "../../constants/messages";
+import RestClient from '../../config/RestClient';
 
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
@@ -76,6 +84,8 @@ class VerifyContactInfoScreen extends Component {
 
 VerifyContactInfoScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
+    userstatus: PropTypes.string.isRequired,
+    userphonenumber: PropTypes.string.isRequired
 }
 
 const styles = StyleSheet.create({

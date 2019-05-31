@@ -1,16 +1,23 @@
+/*
+ * @file: ContactInfo.js
+ * @description: Contact Info file for the application
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
+
 import React, { Component } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import PropTypes from 'prop-types';
-import Layout from "../components/common/Layout";
-import InputNumber from "../components/common/InputNumber";
-import NextButton from "../components/common/NextButton";
-import { moderateScale } from 'react-native-size-matters';
-import { userphonenumber } from '../actions/signup';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { validatePhoneNumber, showAlert } from "../constants/util";
-import MESSAGES from "../constants/messages";
-import RestClient from '../utilities/RestClient';
+
+import Layout from "../../components/common/Layout";
+import InputNumber from "../../components/common/InputNumber";
+import NextButton from "../../components/common/NextButton";
+import { moderateScale } from "react-native-size-matters";
+import { userphonenumber } from "../../actions/signup";
+import { validatePhoneNumber, showAlert } from "../../constants/util";
+import MESSAGES from "../../constants/messages";
+import RestClient from "../../config/RestClient";
 
 class ContactInfoScreen extends Component {
     constructor(props) {
@@ -98,6 +105,10 @@ class ContactInfoScreen extends Component {
 
 ContactInfoScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
+    userstatus: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    userphonenumber: PropTypes.string.isRequired,
+    SetUserPhoneNumber: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

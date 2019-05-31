@@ -1,3 +1,11 @@
+/*
+ * @file: util.js
+ * @description: common util file for the application
+ * @date: 28.05.2019
+ * @author: Pavittar Singh
+ * */
+
+
 import { Alert } from 'react-native';
 
 export const validateAlphabet = (text) => {

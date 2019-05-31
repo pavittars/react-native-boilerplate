@@ -1,3 +1,10 @@
+/*
+ * @file: app-config.js
+ * @description: Input text common component for app..
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types';
 import { View, TextInput, Text } from 'react-native';
@@ -17,6 +24,7 @@ InputText.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onMutate: PropTypes.func.isRequired,
+    maxlength: PropTypes.number.isRequired
 }
 
 export default InputText;

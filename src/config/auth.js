@@ -1,5 +1,12 @@
-// eslint-disable-next-line no-console 
+/*
+ * @file: app-config.js
+ * @description: Async storage for saving token and data to be persisted even after app closes.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
 
+
+// eslint-disable-next-line no-console 
 import AsyncStorage from '@react-native-community/async-storage';
 
 class Auth {
@@ -21,7 +28,7 @@ class Auth {
         }
     }
 
-    static removeValue = async (key) => {
+    static removeData = async (key) => {
         try {
             await AsyncStorage.removeItem([key]);
         } catch (e) {

@@ -1,3 +1,10 @@
+/*
+ * @file: app-config.js
+ * @description: input number common component for app.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types';
 import { View, TextInput, Text } from 'react-native';

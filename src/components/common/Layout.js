@@ -1,3 +1,10 @@
+/*
+ * @file: app-config.js
+ * @description: Layout wrapper for curved design for the app.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from 'prop-types';

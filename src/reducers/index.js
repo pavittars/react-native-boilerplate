@@ -1,3 +1,10 @@
+/*
+ * @file: reducer/index.js
+ * @description: Create redux store with redux persistor for the application.
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
+
 import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';

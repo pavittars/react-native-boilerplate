@@ -1,12 +1,19 @@
-import HomeScreen from "../containers/Home";
-import PersonalInfoScreen from "../containers/PersonalInfo";
-import ContactInfoScreen from "../containers/ContactInfo";
-import VerifyContactInfoScreen from "../containers/VerifyContactInfo";
-import ConnectBankScreen from "../containers/ConnectBank";
+/*
+ * @file: app-config.js
+ * @description: Routes config for Navigation.
+ * @date: 30.05.2019
+ * @author: Pavittar Singh
+ */
+
+import IntroScreen from "../containers/signup/Intro";
+import PersonalInfoScreen from "../containers/signup/PersonalInfo";
+import ContactInfoScreen from "../containers/signup/ContactInfo";
+import VerifyContactInfoScreen from "../containers/signup/VerifyContactInfo";
+import ConnectBankScreen from "../containers/signup/ConnectBank";
 
 const Routes = {
     Home: {
-        screen: HomeScreen,
+        screen: IntroScreen,
         navigationOptions: () => {
             return ({
                 header: null,
@@ -48,7 +55,7 @@ const Routes = {
         screen: ConnectBankScreen,
         navigationOptions: () => {
             return ({
-                title: 'Connect Bank',
+                title: 'Connect Your Bank',
                 headerBackTitle: null
             })
         }

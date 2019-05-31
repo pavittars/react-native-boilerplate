@@ -2,7 +2,7 @@
  * @file: Connection.js
  * @description: Connection file for the application
  * @date: 04.07.2018
- * @author: Jasdeep Singh
+ * @author: Pavittar Singh
  * */
 
 import { environment as PATH } from './app-config';

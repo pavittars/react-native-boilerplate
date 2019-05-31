@@ -1,10 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+/*
+ * @file: App.js
+ * @description: App.js to render the app
+ * @date: 29.05.2019
+ * @author: Pavittar Singh
+ * */
 
 import React, { Component } from 'react';
 import  Navigation  from './config/navigation';
@@ -26,7 +25,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation initialRouteName={'Home'} />
+          <Navigation />
         </PersistGate>
       </Provider>
     );
