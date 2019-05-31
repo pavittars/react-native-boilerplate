@@ -11,4 +11,5 @@ test.js
 yarn.lock
 package.json
 .eslintrc.json
+/src/config/auth.js
 /__tests__/**

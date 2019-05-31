@@ -8,6 +8,7 @@
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.4.2",
     "axios": "^0.18.0",
     "prop-types": "^15.7.2",
     "querystring": "^0.2.0",
@@ -43,7 +44,11 @@
   "jest": {
     "preset": "react-native"
   },
- 
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "**/*.js": [
       "yarn lint",

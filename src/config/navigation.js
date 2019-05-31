@@ -1,84 +1,41 @@
+import React from 'react';
+import { View, ActivityIndicator, StatusBar } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import HomeScreen from "../containers/Home";
-import PersonalInfoScreen from "../containers/PersonalInfo";
-import ContactInfoScreen from "../containers/ContactInfo";
-import VerifyContactInfoScreen from "../containers/VerifyContactInfo";
-import ConnectBankScreen from "../containers/ConnectBank";
+import Routes from './routes';
+import HeaderConfig from './header-config';
+import Auth from '../config/auth';
 
-const Navigation = createStackNavigator({
-    Home: {
-        screen: HomeScreen,
-        navigationOptions: () => {
-            return ({
-                header: null,
-                headerBackTitle: null,
-                headerStyle: {
-                    backgroundColor: '#fff'
-                }
-            })
+export default class Naviagtion extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogin: false,
+            initialRouteName: 'Home'
         }
-    },
-    PersonalInfo: {
-        screen: PersonalInfoScreen,
-        navigationOptions: () => {
-            return ({
-                title: 'Personal Info',
-                headerBackTitle: null
-            })
-        }
-    },
-    ContactInfo: {
-        screen: ContactInfoScreen,
-        navigationOptions: () => {
-            return ({
-                title: 'Contact Info',
-                headerBackTitle: null
-            })
-        }
-    },
-    VerifyContactInfo: {
-        screen: VerifyContactInfoScreen,
-        navigationOptions: () => {
-            return ({
-                title: 'Verify Contact Info',
-                headerBackTitle: null
-            })
-        }
-    },
-    ConnectBank: {
-        screen: ConnectBankScreen,
-        navigationOptions: () => {
-            return ({
-                title: 'Connect Bank',
-                headerBackTitle: null
-            })
-        }
+        this.setInitialRoute = this.setInitialRoute.bind(this);
     }
-}, {
-        initialRouteName: "Home",
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: '#6059e9',
-                height: 112,
-                borderBottomWidth:0,
-                borderColor:'none',
-                shadowOpacity: 0,
-                shadowOffset: {
-                    height: 0,
-                },
-                shadowRadius: 0,
-                elevation: 0
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                color: 'white',
-                fontSize: 18,
-                lineHeight: 23,
-                textAlign: 'center',
-                fontFamily: 'Cera Basic'
-            },
-        },
-    });
 
+    componentDidMount() {
+        Auth.setData('token', 'abc').then(() => {
+            Auth.getData('token').then(result => {
+                this.setInitialRoute(result)
+            })
+        })
+    }
 
-export default createAppContainer(Navigation);
+    setInitialRoute(userToken) {
+        this.setState({ isLogin: true, initialRouteName: userToken ? 'ConnectBank' : 'Home' });
+    }
+
+    render() {
+        let { isLogin, initialRouteName } = this.state;
+        let AppNavigation = createAppContainer(createStackNavigator(Routes, HeaderConfig(initialRouteName)));
+        return (
+            <View style={{ flex: 1 }}>
+                {isLogin && <AppNavigation />}
+                {!isLogin && <View><ActivityIndicator /><StatusBar barStyle="default" /></View>}
+            </View>
+        );
+    }
+}

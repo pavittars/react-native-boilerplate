@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import Navigation from './config/navigation';
+import  Navigation  from './config/navigation';
 import {
   Provider
 } from 'react-redux';
@@ -16,16 +16,17 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 let { store, persistor } = createStore();
 
-import {YellowBox} from 'react-native';
+import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: ReactNative.createElement']);
-console.disableYellowBox = true; 
+// eslint-disable-next-line no-console 
+console.disableYellowBox = true;
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation />
+          <Navigation initialRouteName={'Home'} />
         </PersistGate>
       </Provider>
     );
