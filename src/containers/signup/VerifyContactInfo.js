@@ -9,13 +9,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from "react-native";
 import { connect } from 'react-redux';
-import { showAlert } from "../../constants/util";
+import idx from 'idx';
 
+// custom component import
+import { showAlert } from "../../constants/util";
 import Layout from "../../components/common/Layout";
 import InputText from "../../components/common/InputText";
 import NextButton from "../../components/common/NextButton";
+// constant file import
 import MESSAGES from "../../constants/messages";
 import RestClient from '../../config/RestClient';
+
 
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
@@ -28,7 +32,8 @@ class VerifyContactInfoScreen extends Component {
     }
 
     componentDidMount() {
-        const Message = this.props.navigation.getParam('message');
+        let {navigation} = this.props;
+        const Message = idx(navigation, _ => _.state.params.message); 
         showAlert(Message);
     }
 

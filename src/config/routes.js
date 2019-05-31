@@ -12,7 +12,7 @@ import VerifyContactInfoScreen from "../containers/signup/VerifyContactInfo";
 import ConnectBankScreen from "../containers/signup/ConnectBank";
 
 const Routes = {
-    Home: {
+    Intro: {
         screen: IntroScreen,
         navigationOptions: () => {
             return ({

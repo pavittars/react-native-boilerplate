@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.4.2",
     "axios": "^0.18.0",
+    "idx": "^2.5.6",
     "prop-types": "^15.7.2",
     "querystring": "^0.2.0",
     "react": "16.8.3",
@@ -39,7 +40,8 @@
     "jest": "^24.8.0",
     "lint-staged": "^8.1.7",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "16.8.3",
+    "babel-plugin-idx": "^2.4.0"
   },
   "jest": {
     "preset": "react-native"
@@ -53,6 +55,16 @@
     "**/*.js": [
       "yarn lint",
       "git add"
+    ]
+  },
+  "babel": {
+    "plugins": [
+      [
+        "babel-plugin-idx",
+        {
+          "importName": "./idx"
+        }
+      ]
     ]
   }
 }

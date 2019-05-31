@@ -24,11 +24,11 @@ export default class Naviagtion extends React.Component {
     }
 
     componentDidMount() {
-        Auth.setData('token', 'abc').then(() => {
+        // Auth.setData('token', 'abc').then(() => {
             Auth.getData('token').then(result => {
                 this.setInitialRoute(result)
             })
-        })
+        // })
     }
 
     setInitialRoute(userToken) {
