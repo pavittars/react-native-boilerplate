@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Layout from "../../components/common/Layout";
-import InputNumber from "../../components/common/InputNumber";
+import InputText from "../../components/common/InputText";
 import NextButton from "../../components/common/NextButton";
 import { moderateScale } from "react-native-size-matters";
 import { userphonenumber } from "../../actions/signup";
@@ -88,7 +88,7 @@ class ContactInfoScreen extends Component {
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
                     <View style={{ flex: moderateScale(0.4), paddingTop: moderateScale(53) }}>
-                        <InputNumber placeholder="55533535555" label="Phone number" value={this.state.text} onMutate={(text) => this.setState({ text })} />
+                        <InputText placeholder="55533535555" label="Phone number" value={this.state.text} onMutate={(text) => this.setState({ text })} />
                     </View>
                     <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
                     </View>
