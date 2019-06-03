@@ -1,15 +1,19 @@
 /*
- * @file: app-config.js
+ * @file: routes.js
  * @description: Routes config for Navigation.
  * @date: 30.05.2019
  * @author: Pavittar Singh
  */
 
+import CONSTANT from "../constants/Constant";
 import IntroScreen from "../containers/signup/Intro";
 import PersonalInfoScreen from "../containers/signup/PersonalInfo";
 import ContactInfoScreen from "../containers/signup/ContactInfo";
 import VerifyContactInfoScreen from "../containers/signup/VerifyContactInfo";
 import ConnectBankScreen from "../containers/signup/ConnectBank";
+import SelectPayCheckScreen from "../containers/signup/SelectPayCheck";
+import PayCheckDetailScreen from "../containers/signup/PayCheckDetail";
+
 
 const Routes = {
     Intro: {
@@ -28,7 +32,7 @@ const Routes = {
         screen: PersonalInfoScreen,
         navigationOptions: () => {
             return ({
-                title: 'Personal Info',
+                title: CONSTANT.routeTitles.PersonalInfo,
                 headerBackTitle: null
             })
         }
@@ -37,7 +41,7 @@ const Routes = {
         screen: ContactInfoScreen,
         navigationOptions: () => {
             return ({
-                title: 'Contact Info',
+                title: CONSTANT.routeTitles.ContactInfo,
                 headerBackTitle: null
             })
         }
@@ -46,7 +50,7 @@ const Routes = {
         screen: VerifyContactInfoScreen,
         navigationOptions: () => {
             return ({
-                title: 'Verify Contact Info',
+                title: CONSTANT.routeTitles.VerifyContactInfo,
                 headerBackTitle: null
             })
         }
@@ -55,7 +59,25 @@ const Routes = {
         screen: ConnectBankScreen,
         navigationOptions: () => {
             return ({
-                title: 'Connect Your Bank',
+                title: CONSTANT.routeTitles.ConnectBank,
+                headerBackTitle: null
+            })
+        }
+    },
+    SelectPayCheck: {
+        screen: SelectPayCheckScreen,
+        navigationOptions: () => {
+            return ({
+                title: CONSTANT.routeTitles.SelectPayCheck,
+                headerBackTitle: null
+            })
+        }
+    },
+    PayCheckDetail: {
+        screen: PayCheckDetailScreen,
+        navigationOptions: () => {
+            return ({
+                title: CONSTANT.routeTitles.PayCheckDetail,
                 headerBackTitle: null
             })
         }

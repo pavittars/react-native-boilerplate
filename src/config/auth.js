@@ -1,5 +1,5 @@
 /*
- * @file: app-config.js
+ * @file: auth.js
  * @description: Async storage for saving token and data to be persisted even after app closes.
  * @date: 30.05.2019
  * @author: Pavittar Singh

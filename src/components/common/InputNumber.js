@@ -1,5 +1,5 @@
 /*
- * @file: app-config.js
+ * @file: InputNumber.js
  * @description: input number common component for app.
  * @date: 30.05.2019
  * @author: Pavittar Singh

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 /*
  * @file: Into.js
  * @description: Intro file for the application

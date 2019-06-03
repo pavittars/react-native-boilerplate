@@ -1,19 +1,17 @@
 /*
- * @file: app-config.js
+ * @file: navigation.js
  * @description: Validating login user and setting initial route.
  * @date: 30.05.2019
  * @author: Pavittar Singh
  */
 
 import React from 'react';
-import { View, ActivityIndicator, StatusBar } from 'react-native';
+import { View, ActivityIndicator, StatusBar, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import 'react-native-gesture-handler';
 import Routes from './routes';
 import HeaderConfig from './header-config';
 import Auth from '../config/auth';
-
-// let AppNavigation = createAppContainer(createStackNavigator(Routes, HeaderConfig('Intro')));
-// export default AppNavigation;
 
 export default class Naviagtion extends React.Component {
 
@@ -38,10 +36,14 @@ export default class Naviagtion extends React.Component {
         this.setState({ isLogin: true, initialRouteName: userToken ? 'ConnectBank' : 'Intro' });
     }
 
+    getNavigation(initialRouteName) {
+        return createAppContainer(createStackNavigator(Routes, HeaderConfig(initialRouteName)));
+    }
+
     render() {
-        let { isLogin, initialRouteName } = this.state;
+        let { isLogin } = this.state;
         if (isLogin) {
-            let AppNavigation = createAppContainer(createStackNavigator(Routes, HeaderConfig(initialRouteName)));
+            let AppNavigation = this.getNavigation('SelectPayCheck');
             return (
                 <View style={{ flex: 1 }}>
                     <AppNavigation />
@@ -49,8 +51,10 @@ export default class Naviagtion extends React.Component {
             );
         } else {
             return (
-                <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator /><StatusBar barStyle="default" /></View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <ActivityIndicator />
+                        <StatusBar barStyle="default" />
+                        <Text>Loading...</Text>
                 </View>
             );
         }

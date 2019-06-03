@@ -9,13 +9,15 @@ import React, { Component } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import Layout from "../../components/common/Layout";
-import InputText from "../../components/common/InputText";
-import NextButton from "../../components/common/NextButton";
 import { moderateScale } from "react-native-size-matters";
+
+// custom components
+import Layout from "../../components/common/Layout";
+import InputNumberCC from "../../components/common/InputNumberCC";
+import NextButton from "../../components/common/NextButton";
 import { userphonenumber } from "../../actions/signup";
-import { validatePhoneNumber, showAlert } from "../../constants/util";
+// eslint-disable-next-line no-unused-vars
+import { validatePhoneNumber, showAlert, ValidateCountryCode } from "../../constants/util";
 import MESSAGES from "../../constants/messages";
 import RestClient from "../../config/RestClient";
 
@@ -23,32 +25,41 @@ class ContactInfoScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ''
+            phonenumber: '',
+            code: '+44'
         };
         this._handleValidation = this._handleValidation.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
     _handleValidation() {
-        if (!this.state.text.trim().length) {
+        if (!this.state.code.trim().length) {
+            showAlert(MESSAGES.requiredMessage('Country Code'));
+            return;
+        }
+        if (!ValidateCountryCode(this.state.code)) {
+            showAlert(MESSAGES.ValidateMessage('Country Code'));
+            return;
+        }
+        if (!this.state.phonenumber.trim().length) {
             showAlert(MESSAGES.requiredMessage('Phone Number!'));
             return;
         }
-        if (!validatePhoneNumber(this.state.text)) {
-            showAlert(MESSAGES.ValidateMessage('Phone Number!'));
-            return;
-        }
+        // if (!validatePhoneNumber(this.state.text)) {
+        //     showAlert(MESSAGES.ValidateMessage('Phone Number!'));
+        //     return;
+        // }
         this._handleSubmit();
     }
 
     // save data into redux store
     _handleSubmit() {
         let { navigation, username, SetUserPhoneNumber, userstatus } = this.props;
-        let { text } = this.state;
-        SetUserPhoneNumber(text);
+        let { phonenumber, code } = this.state;
+        SetUserPhoneNumber(phonenumber);
         if (userstatus === 'inactive') {
             RestClient.post('smsAuth', {
-                phoneNumber: text,
+                phoneNumber: `${code}${phonenumber}`,
                 fullName: username
             })
                 .then(result => {
@@ -66,7 +77,7 @@ class ContactInfoScreen extends Component {
         }
         else {
             RestClient.post('login', {
-                phoneNumber: text
+                phoneNumber: phonenumber
             })
                 .then(result => {
                     if (result.status === 200) {
@@ -88,7 +99,7 @@ class ContactInfoScreen extends Component {
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
                     <View style={{ flex: moderateScale(0.4), paddingTop: moderateScale(53) }}>
-                        <InputText placeholder="55533535555" label="Phone number" value={this.state.text} onMutate={(text) => this.setState({ text })} />
+                        <InputNumberCC placeholder="55533535555" label="Phone number" value={this.state.phonenumber} onMutate={(phonenumber) => this.setState({ phonenumber })} CCvalue={this.state.code} CCPlaceholder="+44" onCCMutate={(code) => this.setState({ code })} />
                     </View>
                     <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
                     </View>

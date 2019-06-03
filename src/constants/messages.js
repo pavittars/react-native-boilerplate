@@ -1,5 +1,5 @@
 /*
- * @file: Messages.js
+ * @file: messages.js
  * @description: Messages file for the application
  * @date: 28.05.2019
  * @author: Pavittar Singh

@@ -1,5 +1,5 @@
 /*
- * @file: app-config.js
+ * @file: Layout.js
  * @description: Layout wrapper for curved design for the app.
  * @date: 30.05.2019
  * @author: Pavittar Singh

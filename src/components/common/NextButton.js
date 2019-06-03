@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-color-literals */
 /*
- * @file: app-config.js
+ * @file: NextButton.js
  * @description: Input Button common component for app.
  * @date: 30.05.2019
  * @author: Pavittar Singh

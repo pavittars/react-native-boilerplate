@@ -1,5 +1,5 @@
 /*
- * @file: app-config.js
+ * @file: header-config.js
  * @description: Navigation header styling config.
  * @date: 30.05.2019
  * @author: Pavittar Singh
