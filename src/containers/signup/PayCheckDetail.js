@@ -23,11 +23,11 @@ export default class PayCheckDetailScreen extends Component {
     }
 
     _onEditClick() {
-
+        this.props.navigation.navigate('EditPayCheck');
     }
 
     _handleValidate() {
-        this.props.navigation.navigate('EditPayCheck');
+        this.props.navigation.navigate('PayCheckAdded');
     }
 
     render() {
@@ -41,7 +41,7 @@ export default class PayCheckDetailScreen extends Component {
                                 backgroundColor: '#F0EFFF',
                                 borderRadius: 6.02564,
                                 padding: 5,
-                                justifyContent:'center', alignItems:'center'
+                                justifyContent: 'center', alignItems: 'center'
                             }}>
                                 <Text style={{ fontSize: 12.0513, fontFamily: 'CeraBasic-Bold', color: '#6059E9', }}>EDIT</Text>
                             </TouchableOpacity>

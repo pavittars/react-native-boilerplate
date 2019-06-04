@@ -13,7 +13,8 @@ const CONSTANT = {
         VerifyContactInfo: 'Verify Contact Info',
         ContactInfo: 'Contact Info',
         PayCheckDetail: 'Paycheck Details',
-        EditPayCheck: 'Edit Paycheck'
+        EditPayCheck: 'Edit Paycheck',
+        PayCheckAdded:'Paycheck Added'
     }
 };
 export default CONSTANT;

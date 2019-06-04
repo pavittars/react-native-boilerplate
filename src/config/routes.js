@@ -14,6 +14,7 @@ import ConnectBankScreen from "../containers/signup/ConnectBank";
 import SelectPayCheckScreen from "../containers/signup/SelectPayCheck";
 import PayCheckDetailScreen from "../containers/signup/PayCheckDetail";
 import EditPayCheckScreen from "../containers/signup/EditPayCheck";
+import PayCheckAddedScreen from "../containers/signup/PayCheckAdded";
 
 
 const Routes = {
@@ -82,7 +83,8 @@ const Routes = {
                 headerBackTitle: null
             })
         }
-    },EditPayCheck: {
+    },
+    EditPayCheck: {
         screen: EditPayCheckScreen,
         navigationOptions: () => {
             return ({
@@ -90,8 +92,16 @@ const Routes = {
                 headerBackTitle: null
             })
         }
+    },
+    PayCheckAdded: {
+        screen: PayCheckAddedScreen,
+        navigationOptions: () => {
+            return ({
+                title: CONSTANT.routeTitles.PayCheckAdded,
+                headerBackTitle: null
+            })
+        }
     }
-    
 };
 
 export default Routes;
