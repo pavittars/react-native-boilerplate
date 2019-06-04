@@ -9,6 +9,7 @@
 /* eslint-disable react-native/no-color-literals */
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import PropTypes from 'prop-types';
 // custom components
 import Layout from '../../components/common/Layout';
 import NextButton from '../../components/common/NextButton';
@@ -26,7 +27,7 @@ export default class PayCheckDetailScreen extends Component {
     }
 
     _handleValidate() {
-
+        this.props.navigation.navigate('EditPayCheck');
     }
 
     render() {
@@ -38,7 +39,6 @@ export default class PayCheckDetailScreen extends Component {
                             <Text style={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000' }}>Other Paycheck</Text>
                             <TouchableOpacity onPress={this._onEditClick} style={{
                                 backgroundColor: '#F0EFFF',
-                                // backgroundColor: 'red',
                                 borderRadius: 6.02564,
                                 padding: 5,
                                 justifyContent:'center', alignItems:'center'
@@ -92,3 +92,7 @@ const styles = StyleSheet.create({
 
     }
 });
+
+PayCheckDetailScreen.propTypes = {
+    navigation: PropTypes.object.isRequired
+}

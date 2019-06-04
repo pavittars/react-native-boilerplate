@@ -13,6 +13,7 @@ import VerifyContactInfoScreen from "../containers/signup/VerifyContactInfo";
 import ConnectBankScreen from "../containers/signup/ConnectBank";
 import SelectPayCheckScreen from "../containers/signup/SelectPayCheck";
 import PayCheckDetailScreen from "../containers/signup/PayCheckDetail";
+import EditPayCheckScreen from "../containers/signup/EditPayCheck";
 
 
 const Routes = {
@@ -81,7 +82,16 @@ const Routes = {
                 headerBackTitle: null
             })
         }
+    },EditPayCheck: {
+        screen: EditPayCheckScreen,
+        navigationOptions: () => {
+            return ({
+                title: CONSTANT.routeTitles.EditPayCheck,
+                headerBackTitle: null
+            })
+        }
     }
+    
 };
 
 export default Routes;

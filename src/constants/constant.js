@@ -12,7 +12,8 @@ const CONSTANT = {
         ConnectBank: 'Connect Your Bank',
         VerifyContactInfo: 'Verify Contact Info',
         ContactInfo: 'Contact Info',
-        PayCheckDetail: 'Paycheck Details'
+        PayCheckDetail: 'Paycheck Details',
+        EditPayCheck: 'Edit Paycheck'
     }
 };
 export default CONSTANT;
