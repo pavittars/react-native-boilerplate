@@ -5,7 +5,7 @@
  * @author: Pavittar Singh
  */
 
-import CONSTANT from "../constants/Constant";
+import CONSTANT from "../constants/constant";
 import IntroScreen from "../containers/signup/Intro";
 import PersonalInfoScreen from "../containers/signup/PersonalInfo";
 import ContactInfoScreen from "../containers/signup/ContactInfo";

@@ -35,7 +35,7 @@ class ConnectBankScreen extends Component {
     }
 
     _handleClick() {
-        this.props.navigation.navigate('SelectBankScreen');
+        // this.props.navigation.navigate('SelectBankScreen');
     }
 
     render() {

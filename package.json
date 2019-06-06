@@ -6,6 +6,10 @@
     "start:stag": "REACT_APP_ENV=stag && node node_modules/react-native/local-cli/cli.js start",
     "start:local": "REACT_APP_ENV=local && node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "android:build":"react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "install:apk":"cd android/ && ./gradlew assembleDebug",
+    "android":"yarn rp && yarn android:build && yarn install:apk",
+    "rp": "rm -rf node_modules && yarn",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
