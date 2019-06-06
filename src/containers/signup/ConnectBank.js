@@ -27,6 +27,7 @@ class ConnectBankScreen extends Component {
             switch_3: false
         };
         this._switchHandler = this._switchHandler.bind(this);
+        this._handleClick = this._handleClick.bind(this);
     }
     // click handler for switch input component
     _switchHandler(e, key) {
@@ -34,11 +35,11 @@ class ConnectBankScreen extends Component {
     }
 
     _handleClick() {
-
+        this.props.navigation.navigate('SelectBankScreen');
     }
 
     render() {
-        let { switch_1, switch_2, switch_3 } = this.state;        
+        let { switch_1, switch_2, switch_3 } = this.state;
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container} >
@@ -54,7 +55,7 @@ class ConnectBankScreen extends Component {
                             <Text style={{ fontFamily: 'Cera Basic', fontSize: moderateScale(16), lineHeight: moderateScale(23), fontWeight: 'bold' }}>Please confirm:</Text>
                         </View>
                     </View>
-                    <View style={{ flex: 0.4, paddingVertical:50 }}>
+                    <View style={{ flex: 0.4, paddingVertical: 50 }}>
                         <InputSwitch label="My account is at least 2 months old" onMutate={this._switchHandler} switchKey="switch_1" value={switch_1} />
                         <InputSwitch label="I deposit income to this account" onMutate={this._switchHandler} switchKey="switch_2" value={switch_2} />
                         <InputSwitch label="I make more than 1000 a month" onMutate={this._switchHandler} switchKey="switch_3" value={switch_3} />

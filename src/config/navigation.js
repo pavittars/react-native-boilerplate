@@ -9,6 +9,7 @@ import React from 'react';
 import { View, ActivityIndicator, StatusBar, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import 'react-native-gesture-handler';
+// custom components
 import Routes from './routes';
 import HeaderConfig from './header-config';
 import Auth from '../config/auth';
@@ -41,9 +42,9 @@ export default class Naviagtion extends React.Component {
     }
 
     render() {
-        let { isLogin } = this.state;
+        let { isLogin, initialRouteName } = this.state;
         if (isLogin) {
-            let AppNavigation = this.getNavigation('SelectPayCheck');
+            let AppNavigation = this.getNavigation(initialRouteName);
             return (
                 <View style={{ flex: 1 }}>
                     <AppNavigation />

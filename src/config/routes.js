@@ -11,10 +11,12 @@ import PersonalInfoScreen from "../containers/signup/PersonalInfo";
 import ContactInfoScreen from "../containers/signup/ContactInfo";
 import VerifyContactInfoScreen from "../containers/signup/VerifyContactInfo";
 import ConnectBankScreen from "../containers/signup/ConnectBank";
-import SelectPayCheckScreen from "../containers/signup/SelectPayCheck";
-import PayCheckDetailScreen from "../containers/signup/PayCheckDetail";
-import EditPayCheckScreen from "../containers/signup/EditPayCheck";
-import PayCheckAddedScreen from "../containers/signup/PayCheckAdded";
+import SelectPayCheckScreen from "../containers/paycheck/SelectPayCheck";
+import PayCheckDetailScreen from "../containers/paycheck/PayCheckDetail";
+import EditPayCheckScreen from "../containers/paycheck/EditPayCheck";
+import PayCheckAddedScreen from "../containers/paycheck/PayCheckAdded";
+import SelectBankScreenScreen from "../containers/webview/SelectBank";
+
 
 
 const Routes = {
@@ -101,7 +103,17 @@ const Routes = {
                 headerBackTitle: null
             })
         }
-    }
+    },
+    SelectBankScreen: {
+        screen: SelectBankScreenScreen,
+        navigationOptions: () => {
+            return ({
+                header: null,
+                title: CONSTANT.routeTitles.SelectBank,
+                headerBackTitle: null
+            })
+        }
+    },
 };
 
 export default Routes;

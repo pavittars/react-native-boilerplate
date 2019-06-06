@@ -5,9 +5,9 @@
  * @author: Pavittar Singh
  * */
 
-import { environment as PATH } from './app-config';
+import { getEnv } from './app-config';
 
-const httpUrl = PATH.API_URL;
+const httpUrl = getEnv(process.env.REACT_APP_ENV);
 
 class Connection {
   static getResturl(url) {

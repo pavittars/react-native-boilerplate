@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start:stag": "REACT_APP_ENV=stag && node node_modules/react-native/local-cli/cli.js start",
+    "start:local": "REACT_APP_ENV=local && node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
@@ -20,7 +21,7 @@
     "react-native-remote-svg": "^2.0.6",
     "react-native-size-matters": "^0.2.1",
     "react-native-vector-icons": "^6.4.2",
-    "react-native-webview": "^5.10.0",
+    "react-native-webview": "^5.11.0",
     "react-navigation": "^3.11.0",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
@@ -32,6 +33,7 @@
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
     "babel-jest": "^24.8.0",
+    "babel-plugin-idx": "^2.4.0",
     "eslint": "^5.16.0",
     "eslint-config-react-native": "^4.0.0",
     "eslint-plugin-react": "^7.13.0",
@@ -40,8 +42,7 @@
     "jest": "^24.8.0",
     "lint-staged": "^8.1.7",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react-test-renderer": "16.8.3",
-    "babel-plugin-idx": "^2.4.0"
+    "react-test-renderer": "16.8.3"
   },
   "jest": {
     "preset": "react-native"

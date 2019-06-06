@@ -17,7 +17,7 @@ import InputNumberCC from "../../components/common/InputNumberCC";
 import NextButton from "../../components/common/NextButton";
 import { userphonenumber } from "../../actions/signup";
 // eslint-disable-next-line no-unused-vars
-import { validatePhoneNumber, showAlert, ValidateCountryCode } from "../../constants/util";
+import { showAlert, ValidateCountryCode } from "../../constants/util";
 import MESSAGES from "../../constants/messages";
 import RestClient from "../../config/RestClient";
 
@@ -56,10 +56,11 @@ class ContactInfoScreen extends Component {
     _handleSubmit() {
         let { navigation, username, SetUserPhoneNumber, userstatus } = this.props;
         let { phonenumber, code } = this.state;
-        SetUserPhoneNumber(phonenumber);
+        let mobileNumber = `${code}${phonenumber}`;
+        SetUserPhoneNumber(mobileNumber);
         if (userstatus === 'inactive') {
             RestClient.post('smsAuth', {
-                phoneNumber: `${code}${phonenumber}`,
+                phoneNumber: mobileNumber,
                 fullName: username
             })
                 .then(result => {
@@ -68,16 +69,16 @@ class ContactInfoScreen extends Component {
                             message: result.data.message
                         });
                     } else {
-                        showAlert('Something went wrong !');
+                        showAlert(result.data.message);
                     }
                 })
                 .catch(() => {
-                    showAlert('Something went wrong !');
+                    showAlert(MESSAGES.genericError);
                 });
         }
         else {
             RestClient.post('login', {
-                phoneNumber: phonenumber
+                phoneNumber: mobileNumber
             })
                 .then(result => {
                     if (result.status === 200) {
@@ -85,11 +86,11 @@ class ContactInfoScreen extends Component {
                             message: result.data.message
                         });
                     } else {
-                        showAlert('Something went wrong !');
+                        showAlert(result.data.message);
                     }
                 })
                 .catch(() => {
-                    showAlert('Something went wrong !');
+                    showAlert(MESSAGES.genericError);
                 });
         }
     }
@@ -98,12 +99,8 @@ class ContactInfoScreen extends Component {
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
-                    <View style={{ flex: moderateScale(0.4), paddingTop: moderateScale(53) }}>
+                    <View style={{ flex: 0.8, paddingTop: moderateScale(53) }}>
                         <InputNumberCC placeholder="55533535555" label="Phone number" value={this.state.phonenumber} onMutate={(phonenumber) => this.setState({ phonenumber })} CCvalue={this.state.code} CCPlaceholder="+44" onCCMutate={(code) => this.setState({ code })} />
-                    </View>
-                    <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-                    </View>
-                    <View style={{ flex: 0.1 }}>
                     </View>
                     <View style={{ flex: 0.2 }}>
                         <NextButton style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />

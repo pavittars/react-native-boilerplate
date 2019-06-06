@@ -14,7 +14,8 @@ const CONSTANT = {
         ContactInfo: 'Contact Info',
         PayCheckDetail: 'Paycheck Details',
         EditPayCheck: 'Edit Paycheck',
-        PayCheckAdded:'Paycheck Added'
+        PayCheckAdded:'Paycheck Added',
+        SelectBank: 'Select Bank'
     }
 };
 export default CONSTANT;

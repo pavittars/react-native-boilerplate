@@ -6,5 +6,10 @@
  */
 
 export const environment = {
-  API_URL: 'http://54.71.18.74:4561'
+  API_URLS: {
+    stag: 'https://meanstack.stagingsdei.com:4561',
+    local: 'http://172.24.5.139:3000'
+  }
 };
+
+export const getEnv = (env = 'stag') => environment.API_URLS[env];
