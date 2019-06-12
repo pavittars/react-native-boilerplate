@@ -1,5 +1,5 @@
 /*
- * @file: VerifyContactInfo.js
+ * @file: PayCheckDetail.js
  * @description: Paycheck detail screen for the application
  * @date: 03.06.2019
  * @author: Pavittar Singh
@@ -10,20 +10,39 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
+import idx from 'idx';
+import { connect } from 'react-redux';
 // custom components
 import Layout from '../../components/common/Layout';
 import NextButton from '../../components/common/NextButton';
 import DateCard from '../../components/DateCard';
-export default class PayCheckDetailScreen extends Component {
+import { PayCheckDates } from '../../constants/util';
+import CONSTANT from '../../constants/constant';
+import moment from 'moment';
+
+
+class PayCheckDetailScreen extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            paycheck: {}
+        };
         this._onEditClick = this._onEditClick.bind(this)
         this._handleValidate = this._handleValidate.bind(this)
     }
 
+    componentDidMount() {
+        let { navigation, paychecklisting } = this.props;
+        const paycheckId = idx(navigation, _ => _.state.params.paycheckId);
+        const paycheck = paychecklisting.find(x => x.transaction_id === paycheckId);
+        this.setState({ paycheck });
+    }
+
     _onEditClick() {
-        this.props.navigation.navigate('EditPayCheck');
+        this.props.navigation.navigate('EditPayCheck', {
+            paycheckId: this.state.paycheck.transaction_id
+        });
     }
 
     _handleValidate() {
@@ -31,12 +50,14 @@ export default class PayCheckDetailScreen extends Component {
     }
 
     render() {
+        let { paycheck } = this.state;
+        let dates = PayCheckDates(paycheck.timestamp, CONSTANT.PayCheckDefaultTime);
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
-                    <View style={{ flex: 0.8 }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 64 }}>
-                            <Text style={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000' }}>Other Paycheck</Text>
+                    <View style={{ flex: 0.8, paddingTop: 64 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000' }}>{paycheck.description}</Text>
                             <TouchableOpacity onPress={this._onEditClick} style={{
                                 backgroundColor: '#F0EFFF',
                                 borderRadius: 6.02564,
@@ -52,18 +73,18 @@ export default class PayCheckDetailScreen extends Component {
                                 fontFamily: 'Cera Basic',
                                 fontSize: 20,
                                 lineHeight: 25, color: '#53B263'
-                            }}>£1,400.00</Text>
+                            }}>£{paycheck.amount}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 36 }}>
-                            <Text style={styles.text}>On the <Text style={styles.textBold}>15th</Text> of every <Text style={styles.textBold}>month</Text></Text>
+                            <Text style={styles.text}>On the <Text style={styles.textBold}>{moment(paycheck.timestamp).format('D')}th</Text> of every <Text style={styles.textBold}>month</Text></Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 36 }}>
                             <Text style={styles.text}>Upcoming paychecks</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', paddingVertical: 19, justifyContent: 'space-between' }}>
-                            <DateCard month="may" day="20" />
-                            <DateCard month="may" day="20" />
-                            <DateCard month="may" day="20" />
+                        <View style={{ flexDirection: 'row', paddingVertical: 19, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+                            {dates && dates.map((x, i) =>
+                                <DateCard index={i} month={x.month} day={x.day} />
+                            )}
                         </View>
                     </View>
                     <View style={{ flex: 0.2 }}>
@@ -94,5 +115,10 @@ const styles = StyleSheet.create({
 });
 
 PayCheckDetailScreen.propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    paychecklisting: PropTypes.array.isRequired
 }
+
+const mapStateToProps = (state) => ({ paychecklisting: state.paychecklisting })
+
+export default connect(mapStateToProps, null)(PayCheckDetailScreen);

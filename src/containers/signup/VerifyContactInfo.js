@@ -24,12 +24,12 @@ import MESSAGES from "../../constants/messages";
 import { confirmVerificationCode } from '../../actions/signup';
 import RestClient from '../../config/RestClient';
 
-
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ''
+            text: '',
+            buttonLoading: false
         };
         this._handleValidation = this._handleValidation.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -39,7 +39,7 @@ class VerifyContactInfoScreen extends Component {
     componentDidMount() {
         let { navigation } = this.props;
         const Message = idx(navigation, _ => _.state.params.message);
-        showAlert(Message);
+        Message && showAlert(Message);
     }
 
     // Validate phone number code
@@ -53,6 +53,7 @@ class VerifyContactInfoScreen extends Component {
 
     // handle api call for phone number code
     _handleSubmit() {
+        this.setState({ buttonLoading: true });
         let { navigation, userstatus, userphonenumber, confirmVerificationCode } = this.props;
         let { text } = this.state;
         confirmVerificationCode({
@@ -61,8 +62,13 @@ class VerifyContactInfoScreen extends Component {
             status: userstatus
         }, (result) => {
             if (result.status) {
-                navigation.navigate('ConnectBank');
+                this.setState({ buttonLoading: false }, () => {
+                    // let routeName = CONSTANT.onboardingStatus.find(x => x.id === result.onboardingStatus);
+                    // routeName.route ||
+                    navigation.navigate('ConnectBank');
+                });
             } else {
+                this.setState({ buttonLoading: false });
                 showAlert(result.message);
             }
         });
@@ -108,17 +114,15 @@ class VerifyContactInfoScreen extends Component {
         return (
             <Layout>
                 <View style={styles.container}>
-                    <View style={{ flex: 0.2, paddingTop: 53 }}>
-                        <InputText placeholder="123456" label="Code" maxlength={15} value={this.state.text} onMutate={(text) => this.setState({ text })} />
-                    </View>
-                    <View style={{ flex: 0.6 }}>
-                        <TouchableOpacity onPress={this._onPressButton} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ flex: 0.8, paddingTop: 53 }}>
+                        <InputText placeholder="1234" label="Code" maxlength={15} value={this.state.text} onMutate={(text) => this.setState({ text })} />
+                        <TouchableOpacity onPress={this._onPressButton} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
                             <Text style={{ fontSize: 15, lineHeight: 19, fontFamily: 'Cera Basic', color: '#6059E9' }}>Didn’t get a code? Send again</Text>
-                            <Image style={{marginLeft:5, width:14, height:14}} source={require('../../assets/right_arrow_slate_blue.png')} />
+                            <Image style={{ marginLeft: 5, width: 14, height: 14 }} source={require('../../assets/right_arrow_slate_blue.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />
+                        <NextButton loading={this.state.buttonLoading} btnDisable={this.state.buttonLoading} style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />
                     </View>
                 </View>
             </Layout>

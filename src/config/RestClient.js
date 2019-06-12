@@ -19,7 +19,7 @@ class RestClient {
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
-    config.headers['Content-Type'] = 'application/json';
+    config.headers['Content-Type'] = 'application/json';    
     return new Promise(function (fulfill, reject) {
       axios
         .post(Connection.getResturl(url), params, config)

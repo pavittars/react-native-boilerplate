@@ -5,7 +5,7 @@
  * @author: Pavittar Singh
  * */
 
-import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER, USER_TOKEN } from "../actions/signup";
+import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER, USER_TOKEN, BANK_TOKEN } from "../actions/action-constant";
 
 export const userstatus = (state = '', action) => {
     switch (action.type) {
@@ -37,7 +37,16 @@ export const userphonenumber = (state = '', action) => {
 export const usertoken = (state = {}, action) => {
     switch (action.type) {
         case USER_TOKEN:
-            return action.payload
+            return { ...state, ...action.payload }
+        default:
+            return state;
+    }
+};
+
+export const banktoken = (state = {}, action) => {
+    switch (action.type) {
+        case BANK_TOKEN:
+            return { ...state, ...action.payload }
         default:
             return state;
     }

@@ -1,11 +1,8 @@
 import RestClient from '../config/RestClient';
 import MESSAGES from '../constants/messages';
 
-export const USER_STATUS = 'USER_STATUS';
-export const USER_NAME = 'USER_NAME';
-export const USER_PHONE_NUMBER = 'USER_PHONE_NUMBER';
-export const USER_SIGNUP = 'USER_SIGNUP';
-export const USER_TOKEN = 'USER_TOKEN';
+import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER, USER_TOKEN, BANK_TOKEN } from './action-constant';
+
 
 export const userstatus = (data) => {
   return {
@@ -35,13 +32,22 @@ export const userToken = (data) => {
   };
 }
 
+export const bankToken = (data) => {
+  return {
+    type: BANK_TOKEN,
+    payload: data
+  };
+}
+
+
+
 export const confirmVerificationCode = (params, cb) => {
   return dispatch => {
     RestClient.post('confirmOtp', params)
       .then(result => {
         if (result.status === 200) {
-          cb({ status: true, message: result.message });
           dispatch(userToken(result.data.data));
+          cb({ status: true, message: result.message, onboardingStatus: result.data.data.onboardingStatus });
         } else {
           cb({ status: false, message: result.data.message });
         }
@@ -53,12 +59,13 @@ export const confirmVerificationCode = (params, cb) => {
 };
 
 export const saveBankToken = (params, cb) => {
-  return dispatch => {
-    RestClient.post('truelayerCode', params)
+  return (dispatch, getState) => {
+    let { usertoken: { token } } = getState();
+    RestClient.post('truelayerCode', params, token)
       .then(result => {
         if (result.status === 200) {
-          cb({ status: true, message: result.message });
-          dispatch(userToken(result.data.data));
+          dispatch(bankToken(result.data.data));
+          cb({ status: true, message: result.data.message });
         } else {
           cb({ status: false, message: result.data.message });
         }

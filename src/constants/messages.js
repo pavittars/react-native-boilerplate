@@ -9,6 +9,6 @@
 const MESSAGES = {
     requiredMessage: (error) => `Please Enter ${error}`,
     ValidateMessage: (error) => `Please Enter Valid ${error}`,
-    genericError: 'SomeThing went wrong'
+    genericError: 'Something went wrong'
 };
 export default MESSAGES;

@@ -7,10 +7,11 @@
 
 import { getEnv } from './app-config';
 
-const httpUrl = getEnv(process.env.REACT_APP_ENV);
+const httpUrl = getEnv(process.env.REACT_ENV);
 
 class Connection {
   static getResturl(url) {
+
     return `${httpUrl}/${url}`;
   }
 }

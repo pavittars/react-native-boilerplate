@@ -7,24 +7,43 @@
 
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View, TextInput, Text } from 'react-native';
-import {  moderateScale } from 'react-native-size-matters';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
 
 const InputText = (props) => {
+    let labelStyle = props.labelStyle || styles.labelStyle;
+    let inputStyle = props.inputStyle || styles.inputStyle;
     return (
         <View>
-            <Text style={{ fontSize: moderateScale(20), lineHeight: moderateScale(25)}}>{props.label}</Text>
-            <TextInput style={{ height: moderateScale(50), fontSize: moderateScale(20), marginTop: moderateScale(10), paddingBottom: moderateScale(8), borderBottomWidth: moderateScale(1), borderColor: '#DBDAEA' }} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} maxLength={props.maxlength} onChangeText={(text) => props.onMutate(text)} />
+            <Text style={labelStyle}>{props.label}</Text>
+            <TextInput style={inputStyle} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} maxLength={props.maxlength} onChangeText={(text) => props.onMutate(text)} />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    labelStyle: {
+        fontSize: moderateScale(20),
+        lineHeight: moderateScale(25)
+    },
+    inputStyle: {
+        height: moderateScale(50),
+        fontSize: moderateScale(20),
+        marginTop: moderateScale(10),
+        paddingBottom: moderateScale(8),
+        borderBottomWidth: moderateScale(1),
+        borderColor: '#DBDAEA'
+    }
+});
 
 InputText.propTypes = {
     placeholder: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onMutate: PropTypes.func.isRequired,
-    maxlength: PropTypes.number.isRequired
+    maxlength: PropTypes.number,
+    labelStyle: PropTypes.object,
+    inputStyle: PropTypes.object
 }
 
 export default InputText;

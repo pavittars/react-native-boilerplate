@@ -15,7 +15,7 @@ import SelectPayCheckScreen from "../containers/paycheck/SelectPayCheck";
 import PayCheckDetailScreen from "../containers/paycheck/PayCheckDetail";
 import EditPayCheckScreen from "../containers/paycheck/EditPayCheck";
 import PayCheckAddedScreen from "../containers/paycheck/PayCheckAdded";
-import SelectBankScreenScreen from "../containers/webview/SelectBank";
+import SelectBankScreen from "../containers/webview/SelectBank";
 
 
 
@@ -104,8 +104,8 @@ const Routes = {
             })
         }
     },
-    SelectBankScreen: {
-        screen: SelectBankScreenScreen,
+    SelectBank: {
+        screen: SelectBankScreen,
         navigationOptions: () => {
             return ({
                 header: null,

@@ -26,7 +26,8 @@ class ContactInfoScreen extends Component {
         super(props);
         this.state = {
             phonenumber: '',
-            code: '+44'
+            code: '+44',
+            buttonLoading: false
         };
         this._handleValidation = this._handleValidation.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -54,6 +55,7 @@ class ContactInfoScreen extends Component {
 
     // save data into redux store
     _handleSubmit() {
+        this.setState({buttonLoading: true});
         let { navigation, username, SetUserPhoneNumber, userstatus } = this.props;
         let { phonenumber, code } = this.state;
         let mobileNumber = `${code}${phonenumber}`;
@@ -65,14 +67,17 @@ class ContactInfoScreen extends Component {
             })
                 .then(result => {
                     if (result.status === 200) {
+                        this.setState({buttonLoading: false});
                         navigation.navigate('VerifyContactInfo', {
                             message: result.data.message
                         });
                     } else {
+                        this.setState({buttonLoading: false});
                         showAlert(result.data.message);
                     }
                 })
                 .catch(() => {
+                    this.setState({buttonLoading: false});
                     showAlert(MESSAGES.genericError);
                 });
         }
@@ -85,12 +90,15 @@ class ContactInfoScreen extends Component {
                         navigation.navigate('VerifyContactInfo', {
                             message: result.data.message
                         });
+                        this.setState({buttonLoading: false});
                     } else {
                         showAlert(result.data.message);
+                        this.setState({buttonLoading: false});
                     }
                 })
                 .catch(() => {
                     showAlert(MESSAGES.genericError);
+                    this.setState({buttonLoading: false});
                 });
         }
     }
@@ -103,7 +111,7 @@ class ContactInfoScreen extends Component {
                         <InputNumberCC placeholder="55533535555" label="Phone number" value={this.state.phonenumber} onMutate={(phonenumber) => this.setState({ phonenumber })} CCvalue={this.state.code} CCPlaceholder="+44" onCCMutate={(code) => this.setState({ code })} />
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />
+                        <NextButton loading={this.state.buttonLoading} btnDisable={this.state.buttonLoading} style={'PaddX'} _onPressButton={this._handleValidation} _name={'NEXT'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>

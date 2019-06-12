@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-color-literals */
 /*
- * @file: Into.js
+ * @file: Intro.js
  * @description: Intro file for the application
  * @date: 29.05.2019
  * @author: Pavittar Singh
@@ -16,6 +16,7 @@ import { moderateScale } from 'react-native-size-matters';
 import NextButton from "../../components/common/NextButton";
 import IntroLogo from "../../assets/cashout.png";
 import { userstatus } from "../../actions/signup";
+import { paychecklistingAction } from "../../actions/paycheck";
 
 
 class IntroScreen extends Component {
@@ -27,6 +28,9 @@ class IntroScreen extends Component {
     }
     this._handleSignup = this._handleSignup.bind(this);
     this._handleSignIn = this._handleSignIn.bind(this);
+  }
+
+  componentDidMount() {
   }
 
   _handleSignup() {
@@ -85,6 +89,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)) });
+const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)), paychecklisting: (data) => dispatch(paychecklistingAction(data)) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntroScreen);

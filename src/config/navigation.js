@@ -12,9 +12,8 @@ import 'react-native-gesture-handler';
 // custom components
 import Routes from './routes';
 import HeaderConfig from './header-config';
-import Auth from '../config/auth';
 
-export default class Naviagtion extends React.Component {
+class Naviagtion extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,11 +25,7 @@ export default class Naviagtion extends React.Component {
     }
 
     componentDidMount() {
-        // Auth.setData('token', 'abc').then(() => {
-        Auth.getData('token').then(result => {
-            this.setInitialRoute(result)
-        })
-        // })
+        this.setInitialRoute(false);
     }
 
     setInitialRoute(userToken) {
@@ -53,12 +48,14 @@ export default class Naviagtion extends React.Component {
         } else {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <ActivityIndicator />
-                        <StatusBar barStyle="default" />
-                        <Text>Loading...</Text>
+                    <ActivityIndicator />
+                    <StatusBar barStyle="default" />
+                    <Text>Loading...</Text>
                 </View>
             );
         }
 
     }
 }
+
+export default Naviagtion;

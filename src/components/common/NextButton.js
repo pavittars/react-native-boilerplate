@@ -7,7 +7,7 @@
  */
 
 import React from 'react'
-import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
 
@@ -15,17 +15,21 @@ const NextButton = ({
     _name,
     _onPressButton,
     style = 'container',
-    type = ''
+    type = '',
+    loading = false,
+    btnDisable = false
 }) => {
     return (
         <View style={[styles[style]]}>
-            {(type === '') && <TouchableOpacity onPress={_onPressButton} style={[styles.action]}>
+            {(type === '') && <TouchableOpacity onPress={_onPressButton} style={[styles.action, { opacity: btnDisable ? 0.7 : 1 }]} disabled={btnDisable}>
                 <Text style={styles.name}>{_name}</Text>
-                <Image source={require('../../assets/right_arrow_white.png')} />
+                {!loading && <Image source={require('../../assets/right_arrow_white.png')} />}
+                {loading && <ActivityIndicator color="#fff" />}
             </TouchableOpacity>}
-            {(type === 'reverse') && <TouchableOpacity onPress={_onPressButton} style={[styles.action_inverse]} activeOpacity={5}>
+            {(type === 'reverse') && <TouchableOpacity onPress={_onPressButton} style={[styles.action_inverse, { opacity: btnDisable ? 0.7 : 1 }]} activeOpacity={5} disabled={btnDisable}>
                 <Text style={styles.name_inverse}>{_name}</Text>
-                <Image source={require('../../assets/right_arrow_slate_blue.png')} />
+                {!loading && <Image source={require('../../assets/right_arrow_slate_blue.png')} />}
+                {loading && <ActivityIndicator color="#6059E9" />}
             </TouchableOpacity>}
         </View>
     )
@@ -35,7 +39,9 @@ NextButton.propTypes = {
     _onPressButton: PropTypes.func.isRequired,
     _name: PropTypes.string.isRequired,
     style: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    loading: PropTypes.bool,
+    btnDisable: PropTypes.bool
 };
 
 const styles = StyleSheet.create({

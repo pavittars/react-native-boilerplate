@@ -25,7 +25,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation />
+          <Navigation store={store} />
         </PersistGate>
       </Provider>
     );

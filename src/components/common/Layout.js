@@ -9,10 +9,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from 'prop-types';
 const Layout = (props) => {
+    
     return (
-        <View style={styles.container}>
-            <View style={[styles.childContainer]}>{props.children}</View>
-        </View>
+            <View style={styles.container}>
+                <View style={[styles.childContainer]}>{props.children}</View>
+            </View>
     );
 };
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
         overflow: 'hidden',
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     }
 });
 

@@ -6,10 +6,11 @@
  * */
 
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, StyleSheet, Text } from "react-native";
+import { View, KeyboardAvoidingView, StyleSheet, Text, BackHandler, Alert } from "react-native";
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
 import Image from 'react-native-remote-svg';
+import { NavigationActions, StackActions, HeaderBackButton } from 'react-navigation';
 // components
 import Layout from "../../components/common/Layout";
 import NextButton from "../../components/common/NextButton";
@@ -24,22 +25,85 @@ class ConnectBankScreen extends Component {
         this.state = {
             switch_1: false,
             switch_2: false,
-            switch_3: false
+            switch_3: false,
+            loading: false,
+            btnDisable: true
         };
         this._switchHandler = this._switchHandler.bind(this);
         this._handleClick = this._handleClick.bind(this);
     }
+
+    static navigationOptions = () => {
+        return {
+            headerLeft: (<HeaderBackButton onPress={() => {
+                Alert.alert(
+                    'Logout',
+                    'Are you sure want to logout?',
+                    [
+                        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                        {
+                            text: 'No',
+                            // eslint-disable-next-line no-console
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                        }
+                    ],
+                    { cancelable: false },
+                );
+            }} tintColor="#fff" />)
+        }
+    }
+
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    componentWillUnmount() {
+        this.backHandler.remove();
+    }
+
+    handleBackPress() {
+        Alert.alert(
+            'Logout',
+            'Are you sure want to logout?',
+            [
+                { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                {
+                    text: 'No',
+                    // eslint-disable-next-line no-console
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                }
+            ],
+            { cancelable: false },
+        );
+        return true;
+    }
+
     // click handler for switch input component
     _switchHandler(e, key) {
-        this.setState({ [key]: e });
+        this.setState({ [key]: e }, () => {
+            let { switch_1, switch_2, switch_3 } = this.state;
+            if (switch_1 && switch_2 && switch_3) {
+                this.setState({ btnDisable: false });
+            } else {
+                this.setState({ btnDisable: true });
+            }
+        });
+
     }
 
     _handleClick() {
         // this.props.navigation.navigate('SelectBankScreen');
+        this.props.navigation.dispatch(StackActions.reset({
+            key: null,
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'SelectBank' })],
+        }));
     }
 
     render() {
-        let { switch_1, switch_2, switch_3 } = this.state;
+        let { switch_1, switch_2, switch_3, btnDisable } = this.state;
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container} >
@@ -61,7 +125,7 @@ class ConnectBankScreen extends Component {
                         <InputSwitch label="I make more than 1000 a month" onMutate={this._switchHandler} switchKey="switch_3" value={switch_3} />
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={''} _onPressButton={this._handleClick} _name={'NEXT'} />
+                        <NextButton btnDisable={btnDisable} style={''} _onPressButton={this._handleClick} _name={'NEXT'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>

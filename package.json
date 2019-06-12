@@ -3,27 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start:stag": "REACT_APP_ENV=stag && node node_modules/react-native/local-cli/cli.js start",
-    "start:local": "REACT_APP_ENV=local && node node_modules/react-native/local-cli/cli.js start",
+    "start": "REACT_ENV=prod node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "stag": "REACT_ENV=stag react-native start --reset-cache",
+    "local": "REACT_ENV=local react-native start --reset-cache",
     "test": "jest",
-    "android:build":"react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "install:apk":"cd android/ && ./gradlew assembleDebug",
-    "android":"yarn rp && yarn android:build && yarn install:apk",
+    "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "build:apk": "cd android/ && ./gradlew assembleDebug",
+    "android": "yarn build:android && yarn build:apk",
     "rp": "rm -rf node_modules && yarn",
     "lint": "./node_modules/.bin/eslint **/*.js"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.4.2",
     "axios": "^0.18.0",
     "idx": "^2.5.6",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "querystring": "^0.2.0",
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-easy-toast": "^1.2.0",
     "react-native-gesture-handler": "^1.2.1",
+    "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-remote-svg": "^2.0.6",
     "react-native-size-matters": "^0.2.1",
+    "react-native-skeleton-loader": "^1.0.3",
     "react-native-vector-icons": "^6.4.2",
     "react-native-webview": "^5.11.0",
     "react-navigation": "^3.11.0",
@@ -36,8 +40,10 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-plugin-idx": "^2.4.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "eslint": "^5.16.0",
     "eslint-config-react-native": "^4.0.0",
     "eslint-plugin-react": "^7.13.0",
@@ -64,6 +70,7 @@
   },
   "babel": {
     "plugins": [
+      "transform-inline-environment-variables",
       [
         "babel-plugin-idx",
         {

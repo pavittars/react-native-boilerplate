@@ -10,7 +10,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
-const DateCard = (props) => {
+const DateCard = ({index ,day, month}) => {
     return (
         <View style={{
             borderRadius: 15,
@@ -19,19 +19,21 @@ const DateCard = (props) => {
             width: 90,
             height: 83,
             alignItems:'center',
-            justifyContent:'center'
-        }}>
+            justifyContent:'center',
+            margin: 10
+        }} key={index}>
             <Text style={{ fontFamily: 'Cera Basic', fontSize: 15, lineHeight: 19, textAlign: 'center', color: '#FF6464', textTransform: 'uppercase' }}>
-                {props.month}
+                {month}
             </Text>
             <Text style={{ fontFamily: 'CeraBasic-Bold', fontSize: 26, lineHeight: 33, textAlign: 'center', color: '#000000' }}>
-                {props.day}
+                {day}
             </Text>
         </View>
     )
 }
 
 DateCard.propTypes = {
+    index: PropTypes.number.isRequired,
     month: PropTypes.string.isRequired,
     day: PropTypes.string.isRequired
 }

@@ -7,43 +7,87 @@
 
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, BackHandler, Alert } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { HeaderBackButton } from 'react-navigation';
+import { bindActionCreators } from 'redux';
+
 // custom components
 import Layout from "../../components/common/Layout";
 import Listing from "../../components/Listing";
+import { paychecklisting } from '../../actions/paycheck';
 
-const list = [{
-    name: 'Some Great Paycheck',
-    day: 'On every wednesday',
-    dollar: '£1,400.00'
-}, {
-    name: 'Other Paycheck',
-    day: 'On every wednesday',
-    dollar: '£400.00'
-}, {
-    name: 'Another one from CQ',
-    day: 'On every wednesday',
-    dollar: '£1,000.00'
-}];
-
-export default class SelectPayCheckScreen extends Component {
+class SelectPayCheckScreen extends Component {
     constructor(props) {
         super(props);
         this._handleClick = this._handleClick.bind(this);
+        this.handleBackPress = this.handleBackPress.bind(this);
     }
 
-    _handleClick() {
+    static navigationOptions = () => {
+        return {
+            headerLeft: (<HeaderBackButton onPress={() => {
+                Alert.alert(
+                    'Logout',
+                    'Are you sure want to logout?',
+                    [
+                        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                        {
+                            text: 'No',
+                            // eslint-disable-next-line no-console
+                            onPress: () => console.log('Cancel Pressed'),
+                            style: 'cancel',
+                        }
+                    ],
+                    { cancelable: false },
+                );
+            }} tintColor="#fff" />)
+        }
+    }
+
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        this.props.getpaychecklisting({ userId: this.props.userToken.userId }, () => { });
+    }
+
+    componentWillUnmount() {
+        this.backHandler.remove();
+    }
+
+    handleBackPress() {
+        Alert.alert(
+            'Logout',
+            'Are you sure want to logout?',
+            [
+                { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                {
+                    text: 'No',
+                    // eslint-disable-next-line no-console
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                }
+            ],
+            { cancelable: false },
+        );
+        return true;
+    }
+
+
+    _handleClick(_Item) {
         let { navigation } = this.props;
-        navigation.navigate('PayCheckDetail');
+        navigation.navigate('PayCheckDetail', {
+            paycheckId: _Item.transaction_id
+        });
     }
 
     render() {
+        let { paychecklisting } = this.props;
         return (
             <Layout>
                 <View style={styles.container}>
-                    <Listing list={list} _handleClick={this._handleClick} />
+                    <Listing list={paychecklisting} _handleClick={this._handleClick} />
                 </View>
             </Layout>
         )
@@ -59,5 +103,19 @@ const styles = StyleSheet.create({
 });
 
 SelectPayCheckScreen.propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    userToken: PropTypes.object.isRequired,
+    paychecklisting: PropTypes.array.isRequired,
+    getpaychecklisting: PropTypes.func.isRequired
 }
+
+const mapStateToProps = (state) => ({
+    userToken: state.usertoken,
+    paychecklisting: state.paychecklisting,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    getpaychecklisting: bindActionCreators(paychecklisting, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPayCheckScreen);

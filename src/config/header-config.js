@@ -7,6 +7,7 @@
 
 const HeaderConfig = (initialRouteName) => ({
     initialRouteName,
+    headerLayoutPreset: 'center',
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#6059e9',
@@ -27,7 +28,7 @@ const HeaderConfig = (initialRouteName) => ({
             lineHeight: 23,
             textAlign: 'center',
             fontFamily: 'Cera Basic'
-        },
+        }
     },
 });
 

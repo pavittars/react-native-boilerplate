@@ -16,7 +16,8 @@ import {
 import thunk from 'redux-thunk';
 import logger from "redux-logger";
 
-import { userstatus, username, userphonenumber, usertoken } from './signup';
+import { userstatus, username, userphonenumber, usertoken, banktoken } from './signup';
+import { paychecklisting, savepaycheck, truelayercode } from './paycheck';
 
 const persistConfig = {
     key: 'root',
@@ -28,7 +29,11 @@ const rootReducer = combineReducers({
     userstatus,
     username,
     userphonenumber,
-    usertoken
+    usertoken,
+    banktoken,
+    paychecklisting,
+    savepaycheck,
+    truelayercode
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

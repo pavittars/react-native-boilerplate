@@ -14,8 +14,22 @@ const CONSTANT = {
         ContactInfo: 'Contact Info',
         PayCheckDetail: 'Paycheck Details',
         EditPayCheck: 'Edit Paycheck',
-        PayCheckAdded:'Paycheck Added',
+        PayCheckAdded: 'Paycheck Added',
         SelectBank: 'Select Bank'
-    }
+    },
+    onboardingStatus: [{
+        id: 1,
+        route: 'ConnectBank'
+    },
+    {
+        id: 2,
+        route: 'SelectPayCheck',
+    }],
+    PayCheckTime: [
+        { id: 'biWeekly', value: 'In every week' },
+        { id: 'twiceMonth', value: 'Twice a month' },
+        { id: 'monthly', value: 'Monthly' }
+    ],
+    PayCheckDefaultTime: 'monthly'
 };
 export default CONSTANT;
