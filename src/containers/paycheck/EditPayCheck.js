@@ -12,14 +12,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import idx from 'idx';
 import moment from 'moment';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 
 import InputText from '../../components/common/InputText';
 import NextButton from '../../components/common/NextButton';
 import Layout from '../../components/common/Layout';
-import CONSTANT from '../../constants/constant';
-
-
+import CONSTANT from '../../constants/Constant';
+import { savepaycheck } from '../../actions/paycheck';
+import { PayCheckDates, getNextDate } from '../../constants/util';
 
 class EditPayCheckScreen extends Component {
     constructor(props) {
@@ -44,8 +44,18 @@ class EditPayCheckScreen extends Component {
     }
 
     _handleClick = () => {
-        let { navigation } = this.props;
-        navigation.navigate('PayCheckAdded');
+        let { paycheck, paidTime } = this.state;
+        let { navigation, usertoken, addPayCheck } = this.props;
+        let time = CONSTANT.PayCheckTime.find(x => x.id === paidTime);
+        addPayCheck({
+            "userId": usertoken.userId,
+            "paycheckDates": PayCheckDates(paycheck.timestamp, paidTime),
+            "paycheckAmount": paycheck.amount,
+            "paycheckEmployer": paycheck.description,
+            "upcomingPaychecks": time.id
+        }, () => {
+            navigation.navigate('PayCheckAdded');
+        });
     }
 
     _onMutate = (paycheckName) => {
@@ -57,17 +67,18 @@ class EditPayCheckScreen extends Component {
     }
 
     _getAddedDays = (timestamp) => {
+        let date = moment(timestamp);
         let { paidTime } = this.state;
         if (paidTime === CONSTANT.PayCheckTime[0].value) {
-            return moment(timestamp).add(7, 'days').format('DD');
+            return [date.format('DD-MM-YYYY'), date.add(7, 'days').format('DD-MM-YYYY'), date.add(7, 'days').format('DD-MM-YYYY')];
         } else if (paidTime === CONSTANT.PayCheckTime[1].value) {
-            return moment(timestamp).add(15, 'days').format('DD');
+            return [date.format('DD-MM-YYYY'), date.add(15, 'days').format('DD-MM-YYYY'), date.add(15, 'days').format('DD-MM-YYYY')];
         }
-        return moment(timestamp).add(30, 'days').format('DD');
+        return [date.format('DD-MM-YYYY'), date.add(1, 'month').format('DD-MM-YYYY'), date.add(1, 'month').format('DD-MM-YYYY')];
     }
 
     render() {
-        let { paycheck, paycheckName } = this.state;
+        let { paycheck, paycheckName, paidTime } = this.state;
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
@@ -79,7 +90,7 @@ class EditPayCheckScreen extends Component {
                                 onMutate={this._onMutate}
                                 maxlength={15}
                                 labelStyle={{ fontFamily: 'Cera Basic', fontSize: 15, lineHeight: 19, color: '#000000' }}
-                                inputStyle={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000', opacity: 0.4, marginTop: 7 }} />
+                                inputStyle={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000', opacity: 0.4, marginTop: 7 }} disable={false}/>
                         </View>
 
                         <View style={{ marginTop: 21 }}>
@@ -109,7 +120,7 @@ class EditPayCheckScreen extends Component {
                             </View>
                             <View style={{ flex: 1 }}>
                                 <Text style={{ fontFamily: 'Cera Basic', fontSize: 15, lineHeight: 19, color: '#000000' }}>And the</Text>
-                                <Text style={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000', opacity: 0.4 }}>{this._getAddedDays(paycheck.timestamp)}th</Text>
+                                <Text style={{ fontFamily: 'Cera Basic', fontSize: 20, lineHeight: 25, color: '#000000', opacity: 0.4 }}>{getNextDate(paycheck.timestamp, paidTime)}th</Text>
                             </View>
                         </View>
 
@@ -132,11 +143,13 @@ const styles = StyleSheet.create({
 
 EditPayCheckScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
-    paychecklisting: PropTypes.array.isRequired
+    usertoken: PropTypes.object.isRequired,
+    paychecklisting: PropTypes.array.isRequired,
+    addPayCheck: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({ paychecklisting: state.paychecklisting });
+const mapStateToProps = (state) => ({ paychecklisting: state.paychecklisting, usertoken: state.usertoken });
 
-// const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)) });
+const mapDispatchToProps = (dispatch) => ({ addPayCheck: bindActionCreators(savepaycheck, dispatch) })
 
-export default connect(mapStateToProps, null)(EditPayCheckScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPayCheckScreen);

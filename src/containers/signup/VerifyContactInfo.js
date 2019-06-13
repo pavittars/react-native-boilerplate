@@ -9,20 +9,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import { connect } from 'react-redux';
-import idx from 'idx';
 import { bindActionCreators } from 'redux';
 
 // custom component import
-import { showAlert } from "../../constants/util";
+import { showToast } from "../../constants/util";
 import Layout from "../../components/common/Layout";
 import InputText from "../../components/common/InputText";
 import NextButton from "../../components/common/NextButton";
 // constant file import
 import MESSAGES from "../../constants/messages";
-// import RestClient from '../../config/RestClient';
-
-import { confirmVerificationCode } from '../../actions/signup';
-import RestClient from '../../config/RestClient';
+import { confirmVerificationCode, signup, login } from '../../actions/signup';
+import CONSTANT from '../../constants/Constant';
 
 class VerifyContactInfoScreen extends Component {
     constructor(props) {
@@ -36,16 +33,10 @@ class VerifyContactInfoScreen extends Component {
         this._onPressButton = this._onPressButton.bind(this);
     }
 
-    componentDidMount() {
-        let { navigation } = this.props;
-        const Message = idx(navigation, _ => _.state.params.message);
-        Message && showAlert(Message);
-    }
-
     // Validate phone number code
     _handleValidation() {
         if (!this.state.text.trim().length) {
-            showAlert(MESSAGES.requiredMessage('Code!'));
+            showToast({ message: MESSAGES.requiredMessage('Code!') });
             return;
         }
         this._handleSubmit();
@@ -63,50 +54,60 @@ class VerifyContactInfoScreen extends Component {
         }, (result) => {
             if (result.status) {
                 this.setState({ buttonLoading: false }, () => {
-                    // let routeName = CONSTANT.onboardingStatus.find(x => x.id === result.onboardingStatus);
-                    // routeName.route ||
-                    navigation.navigate('ConnectBank');
+                    let routeName = CONSTANT.onboardingStatus.find(x => x.id === result.onboardingStatus);
+                    navigation.navigate(routeName ? routeName.route : 'ConnectBank');
                 });
             } else {
                 this.setState({ buttonLoading: false });
-                showAlert(result.message);
+                showToast({ message: result.message });
             }
         });
     }
 
+
+    // Handle Sign up process
+    _handleSignUp(mobileNumber) {
+        let { navigation, username, signupUser } = this.props;
+        signupUser({
+            phoneNumber: mobileNumber,
+            fullName: username
+        }, (result) => {
+            if (result.status) {
+                showToast({ message: result.message, type: "success", duration: 4000 });
+                this.setState({ buttonLoading: false }, () => navigation.navigate('VerifyContactInfo'));
+            } else {
+                this.setState({ buttonLoading: false });
+                showToast({ message: result.data.message, type: "danger", duration: 2000 });
+            }
+        })
+    }
+
+    // Handle Login process
+    _handleLogin(mobileNumber) {
+        let { navigation, username, signinUser } = this.props;
+        signinUser({
+            phoneNumber: mobileNumber,
+            fullName: username
+        }, (result) => {
+            if (result.status) {
+                showToast({ message: result.message, type: "success", duration: 4000 });
+                this.setState({ buttonLoading: false }, () => navigation.navigate('VerifyContactInfo'));
+            } else {
+                showToast({ message: result.message, type: "danger", duration: 2000 });
+                this.setState({ buttonLoading: false });
+            }
+        })
+    }
+
+    // on button click
     _onPressButton() {
-        let { username, userstatus, userphonenumber } = this.props;
+        let { userstatus, userphonenumber } = this.props;
         let mobileNumber = userphonenumber;
         if (userstatus === 'inactive') {
-            RestClient.post('smsAuth', {
-                phoneNumber: mobileNumber,
-                fullName: username
-            })
-                .then(result => {
-                    if (result.status === 200) {
-                        showAlert(result.data.message);
-                    } else {
-                        showAlert(result.data.message);
-                    }
-                })
-                .catch(() => {
-                    showAlert(MESSAGES.genericError);
-                });
+            this._handleSignUp(mobileNumber);
         }
         else {
-            RestClient.post('login', {
-                phoneNumber: mobileNumber
-            })
-                .then(result => {
-                    if (result.status === 200) {
-                        showAlert(result.data.message);
-                    } else {
-                        showAlert(result.data.message);
-                    }
-                })
-                .catch(() => {
-                    showAlert(MESSAGES.genericError);
-                });
+            this._handleLogin(mobileNumber);
         }
     }
 
@@ -135,7 +136,9 @@ VerifyContactInfoScreen.propTypes = {
     userstatus: PropTypes.string.isRequired,
     userphonenumber: PropTypes.string.isRequired,
     confirmVerificationCode: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired
+    username: PropTypes.string.isRequired,
+    signupUser: PropTypes.func.isRequired,
+    signinUser: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -145,17 +148,16 @@ const styles = StyleSheet.create({
     }
 });
 
-
-const mapStateToProps = (state) => {
-    return {
-        userstatus: state.userstatus,
-        username: state.username,
-        userphonenumber: state.userphonenumber
-    }
-};
+const mapStateToProps = (state) => ({
+    userstatus: state.userstatus,
+    username: state.username,
+    userphonenumber: state.userphonenumber
+});
 
 const mapDispatchToProps = (dispatch) => ({
-    confirmVerificationCode: bindActionCreators(confirmVerificationCode, dispatch)
+    confirmVerificationCode: bindActionCreators(confirmVerificationCode, dispatch),
+    signupUser: bindActionCreators(signup, dispatch),
+    signinUser: bindActionCreators(login, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerifyContactInfoScreen);

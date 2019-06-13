@@ -5,7 +5,7 @@
  * @author: Pavittar Singh
  */
 
-import CONSTANT from "../constants/constant";
+import CONSTANT from "../constants/Constant";
 import IntroScreen from "../containers/signup/Intro";
 import PersonalInfoScreen from "../containers/signup/PersonalInfo";
 import ContactInfoScreen from "../containers/signup/ContactInfo";
@@ -16,8 +16,7 @@ import PayCheckDetailScreen from "../containers/paycheck/PayCheckDetail";
 import EditPayCheckScreen from "../containers/paycheck/EditPayCheck";
 import PayCheckAddedScreen from "../containers/paycheck/PayCheckAdded";
 import SelectBankScreen from "../containers/webview/SelectBank";
-
-
+import HomeScreen from "../containers/home";
 
 const Routes = {
     Intro: {
@@ -114,6 +113,18 @@ const Routes = {
             })
         }
     },
+    Home: {
+        screen: HomeScreen,
+        navigationOptions: () => {
+            return ({                
+                header: null,
+                headerBackTitle: null,
+                headerStyle: {
+                    backgroundColor: '#6059e9',
+                }
+            })
+        }
+    }
 };
 
 export default Routes;

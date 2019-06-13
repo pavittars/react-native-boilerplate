@@ -65,7 +65,6 @@ export const savepaycheck = (params, cb) => {
     RestClient.post('confirmPaycheck', params, token)
       .then(result => {
         if (result.status === 200) {
-          dispatch(savepaycheckAction(result.data.data));
           cb({ status: true, message: result.data.message });
         } else {
           cb({ status: false, message: result.data.message });

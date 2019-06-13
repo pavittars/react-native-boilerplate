@@ -6,11 +6,11 @@
  * */
 
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, StyleSheet, Text, BackHandler, Alert } from "react-native";
+import { View, KeyboardAvoidingView, StyleSheet, Text, BackHandler, Alert, Image } from "react-native";
 import PropTypes from 'prop-types';
 import { moderateScale } from 'react-native-size-matters';
-import Image from 'react-native-remote-svg';
 import { NavigationActions, StackActions, HeaderBackButton } from 'react-navigation';
+import RNExitApp from 'react-native-exit-app';
 // components
 import Layout from "../../components/common/Layout";
 import NextButton from "../../components/common/NextButton";
@@ -40,7 +40,7 @@ class ConnectBankScreen extends Component {
                     'Logout',
                     'Are you sure want to logout?',
                     [
-                        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                        { text: 'Yes', onPress: () => RNExitApp.exitApp() },
                         {
                             text: 'No',
                             // eslint-disable-next-line no-console
@@ -67,7 +67,7 @@ class ConnectBankScreen extends Component {
             'Logout',
             'Are you sure want to logout?',
             [
-                { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                { text: 'Yes', onPress: () => RNExitApp.exitApp() },
                 {
                     text: 'No',
                     // eslint-disable-next-line no-console
@@ -100,6 +100,7 @@ class ConnectBankScreen extends Component {
             index: 0,
             actions: [NavigationActions.navigate({ routeName: 'SelectBank' })],
         }));
+        this.backHandler.remove();
     }
 
     render() {

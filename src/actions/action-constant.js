@@ -6,6 +6,8 @@
  * */
 
 
+export const CLEAR_STATE = 'CLEAR_STATE';
+
 export const USER_STATUS = 'USER_STATUS';
 export const USER_NAME = 'USER_NAME';
 export const USER_PHONE_NUMBER = 'USER_PHONE_NUMBER';

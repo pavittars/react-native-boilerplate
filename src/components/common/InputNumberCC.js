@@ -24,6 +24,7 @@ const InputNumberCC = ({ label, placeholder, value, onMutate, onCCMutate, CCvalu
     )
 }
 
+// styles for component
 const styles = StyleSheet.create({
     label: {
         fontSize: moderateScale(20),
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     }
 });
 
+// compoment Proptypes check
 InputNumberCC.propTypes = {
     placeholder: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,

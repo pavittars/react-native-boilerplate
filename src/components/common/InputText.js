@@ -10,13 +10,13 @@ import PropTypes from 'prop-types';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 
-const InputText = (props) => {
-    let labelStyle = props.labelStyle || styles.labelStyle;
-    let inputStyle = props.inputStyle || styles.inputStyle;
+const InputText = ({ labelStyle, inputStyle, label, placeholder, value, maxlength, onMutate, disable = true }) => {
+    let labelStyling = labelStyle || styles.labelStyle;
+    let inputStyling = inputStyle || styles.inputStyle;
     return (
         <View>
-            <Text style={labelStyle}>{props.label}</Text>
-            <TextInput style={inputStyle} placeholderTextColor="#999999" placeholder={props.placeholder} value={props.value} maxLength={props.maxlength} onChangeText={(text) => props.onMutate(text)} />
+            <Text style={labelStyling}>{label}</Text>
+            <TextInput style={inputStyling} placeholderTextColor="#999999" placeholder={placeholder} value={value} maxLength={maxlength} onChangeText={(text) => onMutate(text)} editable={disable} />
         </View>
     )
 }
@@ -43,7 +43,8 @@ InputText.propTypes = {
     onMutate: PropTypes.func.isRequired,
     maxlength: PropTypes.number,
     labelStyle: PropTypes.object,
-    inputStyle: PropTypes.object
+    inputStyle: PropTypes.object,
+    disable: PropTypes.bool
 }
 
 export default InputText;

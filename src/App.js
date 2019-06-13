@@ -6,12 +6,14 @@
  * */
 
 import React, { Component } from 'react';
-import Navigation  from './config/navigation';
+import Navigation from './config/navigation';
 import {
   Provider
 } from 'react-redux';
 import createStore from './reducers';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
+import FlashMessage from "react-native-flash-message";
+
 
 let { store, persistor } = createStore();
 
@@ -26,6 +28,7 @@ export default class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Navigation store={store} />
+          <FlashMessage position="top" />
         </PersistGate>
       </Provider>
     );

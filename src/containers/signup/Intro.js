@@ -7,15 +7,14 @@
  * */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Image from 'react-native-remote-svg';
 import { moderateScale } from 'react-native-size-matters';
 
 import NextButton from "../../components/common/NextButton";
 import IntroLogo from "../../assets/cashout.png";
-import { userstatus } from "../../actions/signup";
+import { userstatus, clearState } from "../../actions/signup";
 import { paychecklistingAction } from "../../actions/paycheck";
 
 
@@ -31,6 +30,7 @@ class IntroScreen extends Component {
   }
 
   componentDidMount() {
+    this.props.clearStore();
   }
 
   _handleSignup() {
@@ -46,6 +46,7 @@ class IntroScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#fff" />
         <View style={{ flex: 0.4, justifyContent: 'center', alignItems: 'center' }}>
           <Image
             source={
@@ -80,7 +81,8 @@ const styles = StyleSheet.create({
 IntroScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   SetUserStatus: PropTypes.func.isRequired,
-  userstatus: PropTypes.string
+  userstatus: PropTypes.string,
+  clearStore: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -89,6 +91,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)), paychecklisting: (data) => dispatch(paychecklistingAction(data)) });
+const mapDispatchToProps = (dispatch) => ({ SetUserStatus: (data) => dispatch(userstatus(data)), paychecklisting: (data) => dispatch(paychecklistingAction(data)), clearStore: () => dispatch(clearState()) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntroScreen);

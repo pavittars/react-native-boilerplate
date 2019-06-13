@@ -13,7 +13,7 @@ import { WebView } from 'react-native-webview';
 import { bindActionCreators } from 'redux';
 // custom components
 import { truelayerSuccess } from '../../actions/paycheck';
-import { showAlert } from '../../constants/util';
+import { showToast } from '../../constants/util';
 import Connection from '../../constants/Connection';
 import MESSAGES from '../../constants/messages';
 
@@ -32,12 +32,13 @@ class SelectBankScreen extends Component {
         let { navigation, truelayerSuccess, usertoken } = this.props;
         if (_url.includes('/trueLayerSucess?code') && this.state.url_set) {
             this.setState({ url_set: false }, () => {
-                truelayerSuccess({ userId: usertoken.userId, code: _url.split('/trueLayerSucess?code=')[1] }, () => { });
-                navigation.navigate('SelectPayCheck');
+                truelayerSuccess({ userId: usertoken.userId, code: _url.split('/trueLayerSucess?code=')[1] }, () => { 
+                    navigation.navigate('SelectPayCheck');
+                });
             });
         } else if (_url.includes('/trueLayerError') && this.state.url_set) {
             this.setState({ url_set: false }, () => {
-                showAlert(MESSAGES.genericError);
+                showToast({ message: MESSAGES.genericError, duration: 4000 });
             });
         }
     }
@@ -51,7 +52,7 @@ class SelectBankScreen extends Component {
                     }}
                     javaScriptEnabled={true}
                     allowsInlineMediaPlayback={true}
-                    source={{ uri: Connection.getResturl(`connectBank/${this.props.usertoken.userId}`), headers: { "custom-app-header": "react-native-ios-app" } }}
+                    source={{ uri: Connection.getResturl(`connectBank/${this.props.usertoken.userId}`) }}
                 />
             </View>
         );

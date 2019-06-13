@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { View, ActivityIndicator, StatusBar, Text } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import 'react-native-gesture-handler';
 // custom components
@@ -49,7 +49,6 @@ class Naviagtion extends React.Component {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator />
-                    <StatusBar barStyle="default" />
                     <Text>Loading...</Text>
                 </View>
             );

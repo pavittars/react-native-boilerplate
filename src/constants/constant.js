@@ -28,8 +28,8 @@ const CONSTANT = {
     PayCheckTime: [
         { id: 'biWeekly', value: 'In every week' },
         { id: 'twiceMonth', value: 'Twice a month' },
-        { id: 'monthly', value: 'Monthly' }
+        { id: 'month', value: 'Month' }
     ],
-    PayCheckDefaultTime: 'monthly'
+    PayCheckDefaultTime: 'month'
 };
 export default CONSTANT;

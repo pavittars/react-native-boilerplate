@@ -1,5 +1,5 @@
 /*
- * @file: VerifyContactInfo.js
+ * @file: SelectPayCheck.js
  * @description: Select paycheck screen for the application.
  * @date: 03.06.2019
  * @author: Pavittar Singh
@@ -7,12 +7,14 @@
 
 
 import React, { Component } from 'react';
-import { View, StyleSheet, BackHandler, Alert } from "react-native";
+import { StyleSheet, BackHandler, Alert, ScrollView } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { HeaderBackButton } from 'react-navigation';
 import { bindActionCreators } from 'redux';
+import RNExitApp from 'react-native-exit-app';
+import SkeletonLoader from 'react-native-skeleton-loader';
 
 // custom components
 import Layout from "../../components/common/Layout";
@@ -33,7 +35,7 @@ class SelectPayCheckScreen extends Component {
                     'Logout',
                     'Are you sure want to logout?',
                     [
-                        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                        { text: 'Yes', onPress: () => RNExitApp.exitApp() },
                         {
                             text: 'No',
                             // eslint-disable-next-line no-console
@@ -61,7 +63,7 @@ class SelectPayCheckScreen extends Component {
             'Logout',
             'Are you sure want to logout?',
             [
-                { text: 'Yes', onPress: () => BackHandler.exitApp() },
+                { text: 'Yes', onPress: () => RNExitApp.exitApp() },
                 {
                     text: 'No',
                     // eslint-disable-next-line no-console
@@ -77,6 +79,7 @@ class SelectPayCheckScreen extends Component {
 
     _handleClick(_Item) {
         let { navigation } = this.props;
+        this.backHandler.remove();
         navigation.navigate('PayCheckDetail', {
             paycheckId: _Item.transaction_id
         });
@@ -86,9 +89,11 @@ class SelectPayCheckScreen extends Component {
         let { paychecklisting } = this.props;
         return (
             <Layout>
-                <View style={styles.container}>
-                    <Listing list={paychecklisting} _handleClick={this._handleClick} />
-                </View>
+                <ScrollView style={styles.container}>
+                    <SkeletonLoader type="rectangle" rows={10} height={40} loading={paychecklisting.length ? false : true}>
+                        <Listing list={paychecklisting} _handleClick={this._handleClick} />
+                    </SkeletonLoader>
+                </ScrollView>
             </Layout>
         )
     }

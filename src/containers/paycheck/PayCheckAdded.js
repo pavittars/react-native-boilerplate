@@ -38,7 +38,7 @@ export default class PayCheckAddedScreen extends Component {
                         </View>
                     </View>
                     <View style={{ flex: 0.2 }}>
-                        <NextButton style={''} _onPressButton={this._handleValidate} _name={'CONFIRM'} />
+                        <NextButton style={''} _onPressButton={()=>{}} _name={'CONFIRM'} />
                     </View>
                 </KeyboardAvoidingView>
             </Layout>

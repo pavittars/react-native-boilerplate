@@ -2,13 +2,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 const ListItem = ({ item, _handleClick }) => {
     return (
         <TouchableOpacity style={[styles.container]} onPress={() => _handleClick(item)}>
             <View style={styles.leftChild}>
                 <Text style={{ fontSize: 15, fontFamily: 'Cera Basic', lineHeight: 19, color: '#000000' }}>{item.description}</Text>
-                <Text style={{ fontSize: 13, fontFamily: 'Cera Basic', lineHeight: 16, color: '#000000', opacity: 0.4, paddingTop: 2 }}>{item.timestamp}</Text>
+                <Text style={{ fontSize: 13, fontFamily: 'Cera Basic', lineHeight: 16, color: '#000000', opacity: 0.4, paddingTop: 2 }}>on every {moment(item.timestamp, "YYYY-MM-DD HH:mm:ss").format('dddd')}</Text>
             </View>
             <View style={styles.rightChild}>
                 <Text style={{ fontSize: 15, lineHeight: 19, fontFamily: 'Cera Basic', color: '#53B363', paddingRight: 15 }}>£{item.amount}</Text>

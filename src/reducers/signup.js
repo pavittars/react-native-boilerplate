@@ -5,7 +5,7 @@
  * @author: Pavittar Singh
  * */
 
-import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER, USER_TOKEN, BANK_TOKEN } from "../actions/action-constant";
+import { USER_STATUS, USER_NAME, USER_PHONE_NUMBER, USER_TOKEN, BANK_TOKEN, CLEAR_STATE } from "../actions/action-constant";
 
 export const userstatus = (state = '', action) => {
     switch (action.type) {
@@ -37,7 +37,9 @@ export const userphonenumber = (state = '', action) => {
 export const usertoken = (state = {}, action) => {
     switch (action.type) {
         case USER_TOKEN:
-            return { ...state, ...action.payload }
+            return { ...state, ...action.payload };
+        case CLEAR_STATE:
+            return {};
         default:
             return state;
     }
@@ -47,6 +49,8 @@ export const banktoken = (state = {}, action) => {
     switch (action.type) {
         case BANK_TOKEN:
             return { ...state, ...action.payload }
+        case CLEAR_STATE:
+            return {};
         default:
             return state;
     }

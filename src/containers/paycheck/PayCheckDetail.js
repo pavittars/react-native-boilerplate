@@ -16,9 +16,11 @@ import { connect } from 'react-redux';
 import Layout from '../../components/common/Layout';
 import NextButton from '../../components/common/NextButton';
 import DateCard from '../../components/DateCard';
-import { PayCheckDates } from '../../constants/util';
-import CONSTANT from '../../constants/constant';
+import { PayCheckDates, getPaycheckDayMonth, showToast } from '../../constants/util';
+import CONSTANT from '../../constants/Constant';
 import moment from 'moment';
+import { savepaycheck } from '../../actions/paycheck';
+import { bindActionCreators } from 'redux';
 
 
 class PayCheckDetailScreen extends Component {
@@ -46,12 +48,26 @@ class PayCheckDetailScreen extends Component {
     }
 
     _handleValidate() {
-        this.props.navigation.navigate('PayCheckAdded');
+        let { usertoken, addPayCheck, navigation } = this.props;
+        let { paycheck } = this.state;
+        addPayCheck({
+            "userId": usertoken.userId,
+            "paycheckDates": PayCheckDates(paycheck.timestamp, CONSTANT.PayCheckDefaultTime),
+            "paycheckAmount": paycheck.amount,
+            "paycheckEmployer": paycheck.description,
+            "upcomingPaychecks": CONSTANT.PayCheckDefaultTime
+        }, (result) => {
+            if (result.status) {
+                navigation.navigate('PayCheckAdded');
+            } else {
+                showToast({ message: result.message });
+            }
+        });
     }
 
     render() {
         let { paycheck } = this.state;
-        let dates = PayCheckDates(paycheck.timestamp, CONSTANT.PayCheckDefaultTime);
+        let dates = getPaycheckDayMonth(paycheck.timestamp, CONSTANT.PayCheckDefaultTime);
         return (
             <Layout>
                 <KeyboardAvoidingView style={styles.container}>
@@ -83,7 +99,9 @@ class PayCheckDetailScreen extends Component {
                         </View>
                         <View style={{ flexDirection: 'row', paddingVertical: 19, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
                             {dates && dates.map((x, i) =>
-                                <DateCard index={i} month={x.month} day={x.day} />
+                                <View key={i}>
+                                    <DateCard index={i} month={x.month} day={x.day} />
+                                </View>
                             )}
                         </View>
                     </View>
@@ -116,9 +134,13 @@ const styles = StyleSheet.create({
 
 PayCheckDetailScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
-    paychecklisting: PropTypes.array.isRequired
+    usertoken: PropTypes.object.isRequired,
+    paychecklisting: PropTypes.array.isRequired,
+    addPayCheck: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({ paychecklisting: state.paychecklisting })
+const mapStateToProps = (state) => ({ paychecklisting: state.paychecklisting, usertoken: state.usertoken });
 
-export default connect(mapStateToProps, null)(PayCheckDetailScreen);
+const mapDispatchToProps = (dispatch) => ({ addPayCheck: bindActionCreators(savepaycheck, dispatch) })
+
+export default connect(mapStateToProps, mapDispatchToProps)(PayCheckDetailScreen);

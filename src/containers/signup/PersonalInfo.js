@@ -15,8 +15,9 @@ import Layout from "../../components/common/Layout";
 import NextButton from '../../components/common/NextButton';
 import InputText from '../../components/common/InputText';
 import { username } from '../../actions/signup';
-import { validateAlphabet, showAlert } from "../../constants/util";
+import { validateAlphabet } from "../../constants/util";
 import MESSAGES from "../../constants/messages";
+import { showToast } from '../../constants/util';
 
 class PersonalInfoScreen extends Component {
     constructor(props) {
@@ -35,11 +36,19 @@ class PersonalInfoScreen extends Component {
     // validate the fields in the component before submiting (validate username)
     _handleValidate() {
         if (!this.state.text.trim().length) {
-            showAlert(MESSAGES.requiredMessage('Full Name'));
+            showToast({
+                message: MESSAGES.requiredMessage('Full Name'),
+                type: "danger",
+                duration: 2000
+            });
             return;
         }
         if (!validateAlphabet(this.state.text)) {
-            showAlert(MESSAGES.ValidateMessage('Full Name'));
+            showToast({
+                message: MESSAGES.ValidateMessage('Full Name'),
+                type: "danger",
+                duration: 2000
+            });
             return;
         }
 
