@@ -116,7 +116,7 @@ const Routes = {
     Home: {
         screen: HomeScreen,
         navigationOptions: () => {
-            return ({                
+            return ({
                 header: null,
                 headerBackTitle: null,
                 headerStyle: {

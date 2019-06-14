@@ -36,8 +36,8 @@ export const ValidateCountryCode = (text) => {
 };
 
 export const getPaycheckDayMonth = (timestamp) => {
-    let date = moment(timestamp);
-    let nextdate = moment(timestamp).add(1, 'month');
+    let date = moment(timestamp).add(1, 'month');
+    let nextdate = moment(timestamp).add(2, 'month');
     return [{
         day: date.format('DD'),
         month: date.format('MMM')
@@ -50,11 +50,11 @@ export const getPaycheckDayMonth = (timestamp) => {
 export const PayCheckDates = (timestamp, paidTime) => {
     let date = moment(timestamp);
     if (paidTime === CONSTANT.PayCheckTime[0].value) {
-        return [date.format('DD-MM-YYYY'), date.add(7, 'days').format('DD-MM-YYYY'), date.add(7, 'days').format('DD-MM-YYYY')];
+        return [date.add(7, 'days').format('YYYY-MM-DD'), date.add(7, 'days').format('YYYY-MM-DD'), date.add(7, 'days').format('YYYY-MM-DD')];
     } else if (paidTime === CONSTANT.PayCheckTime[1].value) {
-        return [date.format('DD-MM-YYYY'), date.add(15, 'days').format('DD-MM-YYYY'), date.add(15, 'days').format('DD-MM-YYYY')];
+        return [date.add(15, 'days').format('YYYY-MM-DD'), date.add(15, 'days').format('YYYY-MM-DD'), date.add(15, 'days').format('YYYY-MM-DD')];
     }
-    return [date.format('DD-MM-YYYY'), date.add(1, 'month').format('DD-MM-YYYY'), date.add(1, 'month').format('DD-MM-YYYY')];
+    return [date.add(1, 'month').format('YYYY-MM-DD'), date.add(1, 'month').format('YYYY-MM-DD'), date.add(1, 'month').format('YYYY-MM-DD')];
 };
 
 export const getNextDate = (timestamp, paidTime) => {

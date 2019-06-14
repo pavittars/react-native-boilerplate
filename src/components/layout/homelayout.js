@@ -6,13 +6,26 @@
  */
 
 import React from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, StatusBar, Text } from "react-native";
 import PropTypes from 'prop-types';
+import { moderateScale } from 'react-native-size-matters';
 
 const HomeLayout = (props) => {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="#6059e9" />
+            <View style={{
+                backgroundColor: '#6059e9',
+                paddingVertical: moderateScale(25),
+                flex: moderateScale(0.2),
+                justifyContent: 'center',
+                paddingHorizontal: moderateScale(40),
+                zIndex: moderateScale(-100)
+            }}>
+                <Text style={{ fontSize: moderateScale(18), lineHeight: moderateScale(23), color: '#ffffff', fontFamily: 'CeraBasic-Bold' }}>
+                    {props.text}
+                </Text>
+            </View>
             <View style={[styles.childContainer]}>
                 {props.children}
             </View>
@@ -21,27 +34,22 @@ const HomeLayout = (props) => {
 };
 
 HomeLayout.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    text: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#6059e9',
         flex: 1,
-        // zIndex: -1
+        zIndex: moderateScale(-100)
     },
     childContainer: {
-        flex: 1,
-        position: 'absolute',
-        top: 180,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        borderTopRightRadius: 40,
-        borderTopLeftRadius: 40,
-        overflow: 'hidden',
+        flex: moderateScale(1),
+        borderTopRightRadius: moderateScale(40),
+        borderTopLeftRadius: moderateScale(40),
         backgroundColor: '#fff',
-        zIndex: -100
+        zIndex: moderateScale(-100)
     }
 });
 
